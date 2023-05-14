@@ -94,7 +94,7 @@ class _CheckCareerState extends State<CheckCareer> {
               onPressed: () {},
               child: Text(check,
                   style:
-                      customTextStyle(size: 20, fontWeight: FontWeight.w700)),
+                      customTextStyle(size: 20.0, fontWeight: FontWeight.w700)),
             ),
           ),
         ],
