@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/header.dart';
+import 'package:th_knn/layouts/text_style.dart';
+import 'package:th_knn/models/grades.dart';
+
+import '../values/strings.dart';
 
 class CheckCareer extends StatefulWidget {
   const CheckCareer({super.key});
@@ -10,11 +14,7 @@ class CheckCareer extends StatefulWidget {
 }
 
 class _CheckCareerState extends State<CheckCareer> {
-  final List<List<String>> _data = [
-    ['Course Code', 'Units', 'Grades'],
-    ['Row 2', 'Value 4', 'Value 5'],
-    ['Row 3', 'Value 7', 'Value 8'],
-  ];
+  List<Grades> gradesList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,32 +23,78 @@ class _CheckCareerState extends State<CheckCareer> {
         children: [
           backgroundImage,
           const Header(),
-          Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: DataTable(
-                columns: _data[0].map((String title) {
-                  return DataColumn(
-                    label: Text(title),
-                  );
-                }).toList(),
-                rows: _data.skip(1).map((List<String> rowData) {
-                  return DataRow(
-                    cells: rowData.map((String value) {
-                      return DataCell(
-                        TextFormField(
-                          initialValue: value,
-                          onChanged: (newValue) {
-                            setState(() {
-                              rowData[rowData.indexOf(value)] = newValue;
-                            });
-                          },
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }).toList(),
-              ),
+          Positioned.fill(
+            top: 120,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: Table(
+                    border: TableBorder.all(),
+                    defaultColumnWidth: const FlexColumnWidth(),
+                    children: [
+                      TableRow(children: [
+                        TableCell(
+                            child: Text(courseCode, style: customTextStyle())),
+                        TableCell(
+                            child: Text(
+                          units,
+                          style: customTextStyle(),
+                        )),
+                        TableCell(
+                            child: Text(
+                          rating,
+                          style: customTextStyle(),
+                        ))
+                      ]),
+                      ...gradesList.map((data) {
+                        return TableRow(children: [
+                          TableCell(
+                            child: TextField(
+                              onChanged: (value) {
+                                data.courseCode = value;
+                              },
+                            ),
+                          ),
+                          TableCell(
+                            child: TextField(
+                              onChanged: (value) {
+                                data.units = int.parse(value);
+                              },
+                            ),
+                          ),
+                          TableCell(
+                            child: TextField(
+                              onChanged: (value) {
+                                data.rating = double.parse(value);
+                              },
+                            ),
+                          ),
+                        ]);
+                      }).toList(),
+                    ],
+                  ),
+                ),
+                FloatingActionButton(
+                  shape: const CircleBorder(),
+                  onPressed: () {
+                    setState(() {
+                      gradesList.add(Grades());
+                    });
+                  },
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(check,
+                  style:
+                      customTextStyle(size: 20, fontWeight: FontWeight.w700)),
             ),
           ),
         ],
