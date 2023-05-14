@@ -17,13 +17,19 @@ class CheckCareer extends StatefulWidget {
 class _CheckCareerState extends State<CheckCareer> {
   List<Grades> gradesList = [];
 
+  /// This function removes objects from a list if they have null values for certain properties.
+  void removeNullValues() {
+    gradesList.removeWhere((obj) =>
+        obj.courseCode == null || obj.units == null || obj.rating == null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0.0),
       body: Stack(
         children: [
-          backgroundImage,
+          const BackgroundImage(),
           const Header(),
           Positioned.fill(
             top: 150,

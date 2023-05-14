@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(toolbarHeight: 0.0),
         body: Stack(children: [
-          backgroundImage,
+          const BackgroundImage(),
           const Header(),
           Center(
             child:
