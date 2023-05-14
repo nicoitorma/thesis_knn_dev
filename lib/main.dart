@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(toolbarHeight: 0.0),
         body: Stack(children: [
           const BackgroundImage(),
-          const Header(),
+          const Header(headerTitle: 'Good Day, User!'),
           Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Container(
                   width: 229.0,
                   height: 112.0,
-                  decoration: customBoxDecoration(),
+                  decoration: customBoxDecor(),
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Container(
                   width: 229.0,
                   height: 112.0,
-                  decoration: customBoxDecoration(),
+                  decoration: customBoxDecor(),
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 width: 229.0,
                 height: 112.0,
-                decoration: customBoxDecoration(),
+                decoration: customBoxDecor(),
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(

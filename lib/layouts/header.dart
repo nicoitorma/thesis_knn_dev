@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:th_knn/values/strings.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final String? headerTitle;
+  const Header({super.key, this.headerTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +18,11 @@ class Header extends StatelessWidget {
           ),
           border: Border.all(width: 10.0, color: const Color(0x80707070)),
         ),
-        child: const Align(
+        child: Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            'Good Day, User!',
-            style: TextStyle(
+            headerTitle ?? goodDay,
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontSize: 30,
               color: Color(0xff000000),
