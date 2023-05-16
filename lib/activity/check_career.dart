@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:th_knn/activity/knn_results.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/box_decoration.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/models/grades.dart';
-
-import '../utils/standard_scaler.dart';
 import '../values/strings.dart';
 
 class CheckCareer extends StatefulWidget {
@@ -92,6 +91,7 @@ class _CheckCareerState extends State<CheckCareer> {
                             Container(
                               decoration: tableBoxDecor(),
                               child: TextField(
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 onChanged: (value) {
                                   data.units = int.parse(value);
@@ -101,6 +101,7 @@ class _CheckCareerState extends State<CheckCareer> {
                             Container(
                               decoration: tableBoxDecor(),
                               child: TextField(
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 onChanged: (value) {
                                   data.rating = double.parse(value);
@@ -141,16 +142,19 @@ class _CheckCareerState extends State<CheckCareer> {
           GestureDetector(
             onTap: () {
               removeNullValues();
-              final data = [
-                [1.0, 2.0, 3.0],
-                [4.0, 5.0, 6.0],
-                [7.0, 8.0, 9.0],
-              ];
-              final scaler = StandardScaler();
-              scaler.fit(data);
-              final transformedData = scaler.transform(data);
+              // final data = [
+              //   [1.0, 2.0, 3.0],
+              //   [4.0, 5.0, 6.0],
+              //   [7.0, 8.0, 9.0],
+              // ];
+              // final scaler = StandardScaler();
+              // scaler.fit(data);
+              // final transformedData = scaler.transform(data);
 
-              print(transformedData);
+              // print(transformedData);
+              print(gradesList);
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (builder) => KnnResult(grades: gradesList)));
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

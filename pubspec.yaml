@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   adobe_xd: ^2.0.1
   webview_flutter: ^4.2.0
+  ml_algo: ^16.17.7
+  ml_dataframe: ^1.6.0
 
 dev_dependencies:
   flutter_test:
