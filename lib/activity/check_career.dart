@@ -15,7 +15,14 @@ class CheckCareer extends StatefulWidget {
 }
 
 class _CheckCareerState extends State<CheckCareer> {
+  String? selectedCourse;
   List<Grades> gradesList = [Grades(), Grades(), Grades()];
+
+  final List<String> courseItem = [
+    'BSCS',
+    'BSIT',
+    'BSIS',
+  ];
 
   /// This function removes objects from a list if they have null values for certain properties.
   void removeNullValues() {
@@ -32,103 +39,154 @@ class _CheckCareerState extends State<CheckCareer> {
           const BackgroundImage(),
           const Header(headerTitle: 'Enter your grades'),
           Positioned.fill(
-            top: 150,
+            top: 130,
             bottom: 80,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Flexible(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Table(
-                      defaultColumnWidth: const FlexColumnWidth(),
-                      children: [
-                        TableRow(children: [
-                          Container(
-                              height: 50,
-                              decoration: tableBoxDecor(),
-                              child: Center(
-                                child: Text(
-                                  courseCode,
-                                  style: customTextStyle(),
-                                ),
-                              )),
-                          Container(
-                              height: 50,
-                              decoration: tableBoxDecor(),
-                              child: Center(
-                                  child:
-                                      Text(units, style: customTextStyle()))),
-                          Container(
-                              height: 50,
-                              decoration: tableBoxDecor(),
-                              child: Center(
-                                  child:
-                                      Text(rating, style: customTextStyle()))),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: tableBoxDecor(),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text('$program: ',
+                              style: customTextStyle(size: 20.0)),
+                          DropdownButton<String>(
+                            style: customTextStyle(size: 20.0),
+                            hint: Text(program),
+                            value: selectedCourse,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedCourse = value!;
+                              });
+                            },
+                            items: courseItem.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
                         ]),
-                        ...gradesList.map((data) {
-                          return TableRow(children: [
-                            /// This code is creating a `Container` widget that contains a `TextField`
-                            /// widget. The `TextField` widget is used to allow the user to input a
-                            /// value for the `rating` property of a `Grades` object. The `onChanged`
-                            /// callback function is triggered whenever the user types a new value into
-                            /// the `TextField`. This function updates the `rating` property of the
-                            /// corresponding `Grades` object in the `gradesList` list with the new
-                            /// value entered by the user. The `tableBoxDecoration()` function is used
-                            /// to apply a custom decoration to the `Container` widget, which likely
-                            /// includes a border and background color to make the table look more
-                            /// visually appealing.
-                            Container(
-                              decoration: tableBoxDecor(),
-                              child: TextField(
-                                textAlign: TextAlign.center,
-                                onChanged: (value) {
-                                  data.courseCode = value;
-                                },
-                              ),
-                            ),
-                            Container(
-                              decoration: tableBoxDecor(),
-                              child: TextField(
-                                keyboardType: TextInputType.number,
-                                textAlign: TextAlign.center,
-                                onChanged: (value) {
-                                  data.units = int.parse(value);
-                                },
-                              ),
-                            ),
-                            Container(
-                              decoration: tableBoxDecor(),
-                              child: TextField(
-                                keyboardType: TextInputType.number,
-                                textAlign: TextAlign.center,
-                                onChanged: (value) {
-                                  data.rating = double.parse(value);
-                                },
-                              ),
-                            ),
-                          ]);
-                        }).toList(),
-                      ],
+                  ),
+                ),
+                Flexible(
+                  child: GestureDetector(
+                    onTap: () {
+                      if (selectedCourse == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(noProgram,
+                                style: customTextStyle(
+                                    size: 20.0, color: Colors.white))));
+                      }
+                    },
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: IgnorePointer(
+                        ignoring: selectedCourse == null,
+                        child: Table(
+                          defaultColumnWidth: const FlexColumnWidth(),
+                          children: [
+                            TableRow(children: [
+                              Container(
+                                  height: 50,
+                                  decoration: tableBoxDecor(),
+                                  child: Center(
+                                    child: Text(
+                                      courseCode,
+                                      style: customTextStyle(),
+                                    ),
+                                  )),
+                              Container(
+                                  height: 50,
+                                  decoration: tableBoxDecor(),
+                                  child: Center(
+                                      child: Text(units,
+                                          style: customTextStyle()))),
+                              Container(
+                                  height: 50,
+                                  decoration: tableBoxDecor(),
+                                  child: Center(
+                                      child: Text(rating,
+                                          style: customTextStyle()))),
+                            ]),
+                            ...gradesList.map((data) {
+                              return TableRow(children: [
+                                /// This code is creating a `Container` widget that contains a `TextField`
+                                /// widget. The `TextField` widget is used to allow the user to input a
+                                /// value for the `rating` property of a `Grades` object. The `onChanged`
+                                /// callback function is triggered whenever the user types a new value into
+                                /// the `TextField`. This function updates the `rating` property of the
+                                /// corresponding `Grades` object in the `gradesList` list with the new
+                                /// value entered by the user. The `tableBoxDecoration()` function is used
+                                /// to apply a custom decoration to the `Container` widget, which likely
+                                /// includes a border and background color to make the table look more
+                                /// visually appealing.
+                                Container(
+                                  decoration: tableBoxDecor(),
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none),
+                                    textAlign: TextAlign.center,
+                                    onChanged: (value) {
+                                      data.courseCode = value;
+                                    },
+                                  ),
+                                ),
+                                Container(
+                                  decoration: tableBoxDecor(),
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none),
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    onChanged: (value) {
+                                      data.units = int.parse(value);
+                                    },
+                                  ),
+                                ),
+                                Container(
+                                  decoration: tableBoxDecor(),
+                                  child: TextField(
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none),
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    onChanged: (value) {
+                                      data.rating = double.parse(value);
+                                    },
+                                  ),
+                                ),
+                              ]);
+                            }).toList(),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
 
                 /// This code is creating a floating action button with a circular shape and an "add"
                 /// icon. When the button is pressed, it adds a new instance of the `Grades` class to
                 /// the `gradesList` list and triggers a state update using the `setState()` method.
                 /// This will cause the UI to rebuild and display the new row in the table.
-                FloatingActionButton(
-                  shape: const CircleBorder(),
-                  backgroundColor: Colors.grey,
-                  onPressed: () {
-                    setState(() {
-                      gradesList.add(Grades());
-                    });
-                  },
-                  child: const Icon(Icons.add),
+                IgnorePointer(
+                  ignoring: selectedCourse == null,
+                  child: FloatingActionButton(
+                    shape: const CircleBorder(),
+                    backgroundColor: Colors.grey,
+                    onPressed: () {
+                      setState(() {
+                        gradesList.add(Grades());
+                      });
+                    },
+                    child: const Icon(Icons.add),
+                  ),
                 ),
               ],
             ),
@@ -153,8 +211,16 @@ class _CheckCareerState extends State<CheckCareer> {
 
               // print(transformedData);
               print(gradesList);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (builder) => KnnResult(grades: gradesList)));
+              if (gradesList.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                  noData,
+                  style: customTextStyle(size: 20.0, color: Colors.white),
+                )));
+              } else {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (builder) => KnnResult(grades: gradesList)));
+              }
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

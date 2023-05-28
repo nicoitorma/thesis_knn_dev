@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:ml_dataframe/ml_dataframe.dart';
 import 'package:ml_algo/ml_algo.dart';
 import 'package:th_knn/models/grades.dart';
 import 'package:th_knn/utils/standard_scaler.dart';
@@ -29,8 +28,8 @@ class KnnAlgorithm {
   }
 
   Future getResults(List<Grades> grades) async {
-    DataFrame? data;
-    List<List<double>>? filtereredGrades = [];
+    // DataFrame? data;
+    // List<List<double>>? filtereredGrades = [];
     List<double>? innerList = [];
     final scaler = StandardScaler();
 
