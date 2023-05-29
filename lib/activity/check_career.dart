@@ -7,6 +7,7 @@ import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/models/grades.dart';
 import 'package:th_knn/utils/categorize_grades.dart';
 import '../values/strings.dart';
+import 'knn_results.dart';
 
 class CheckCareer extends StatefulWidget {
   const CheckCareer({super.key});
@@ -185,11 +186,12 @@ class _CheckCareerState extends State<CheckCareer> {
               alignment: Alignment.bottomCenter,
               child: InkWell(
                 onTap: () {
-                  List cleanedData =
-                      categorizeGrades.removeNullValues(gradesList);
-                  categorizeGrades.categorizeSemesters(
-                      csProgramOrder, cleanedData);
-
+                  /// `categorizeGrades.categorizeSemesters(gradesList);` is calling the
+                  /// `categorizeSemesters` method from the `CategorizeGrades` class and passing in the
+                  /// `gradesList` as a parameter. This method likely categorizes the grades in the
+                  /// `gradesList` by semester and returns the categorized data.
+                  List<List<double>> result = categorizeGrades
+                      .categorizeSemesters(selectedCourse!, gradesList);
                   if (gradesList.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(
@@ -197,8 +199,8 @@ class _CheckCareerState extends State<CheckCareer> {
                       style: customTextStyle(size: 20.0, color: Colors.white),
                     )));
                   } else {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (builder) => KnnResult(grades: gradesList)));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (builder) => KnnResult(grades: result)));
                   }
                 },
                 child: Container(

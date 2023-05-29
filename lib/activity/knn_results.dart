@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/utils/knn_classifier.dart';
-
-import '../models/grades.dart';
+import 'package:th_knn/utils/standard_scaler.dart';
 
 class KnnResult extends StatefulWidget {
-  final List<Grades> grades;
+  final List<List<double>> grades;
 
   const KnnResult({super.key, required this.grades});
 
@@ -15,12 +14,15 @@ class KnnResult extends StatefulWidget {
 }
 
 class _KnnResultState extends State<KnnResult> {
-  var results;
+  final knnAlgo = KnnAlgorithm();
+  final scaler = StandardScaler();
+  List<List> scaledData = [];
 
   @override
   void initState() {
-    final knnAlgo = KnnAlgorithm();
-    results = knnAlgo.getResults(widget.grades);
+    scaler.fit(widget.grades);
+    scaledData = scaler.transform(widget.grades);
+
     super.initState();
   }
 
@@ -28,12 +30,12 @@ class _KnnResultState extends State<KnnResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0.0),
-      body: Stack(children: [
-        const BackgroundImage(),
-        const Header(),
-        Column(
-          children: [Text(results.toString())],
-        )
+      body: const Stack(children: [
+        BackgroundImage(),
+        Header(),
+        // Column(
+        //   children: [Text(results.toString())],
+        // )
       ]),
     );
   }

@@ -9,7 +9,7 @@ class StandardScaler {
   void fit(List<List<double>> X) {
     final numFeatures = X[0].length;
 
-    for (var i = 0; i < numFeatures; i++) {
+    for (var i = 0; i < numFeatures; ++i) {
       final columnData = X.map((row) => row[i]).toList();
       final mean = _calculateMean(columnData);
       final std = _calculateStandardDeviation(columnData);
@@ -25,7 +25,7 @@ class StandardScaler {
     for (var row in X) {
       final transformedRow = <double>[];
 
-      for (var i = 0; i < row.length; i++) {
+      for (var i = 0; i < row.length; ++i) {
         final transformedValue = (row[i] - _mean[i]) / _std[i];
         transformedRow.add(transformedValue);
       }

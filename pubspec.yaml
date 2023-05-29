@@ -65,7 +65,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/imgs/bg.png
+    - assets/imgs/
 
   fonts:
     - family: Poppins

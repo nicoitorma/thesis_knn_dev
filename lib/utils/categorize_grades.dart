@@ -1,4 +1,5 @@
 import '../models/grades.dart';
+import '../values/strings.dart';
 
 class CategorizeGrades {
   /// This function removes objects from a list if they have null values for certain properties.
@@ -11,30 +12,28 @@ class CategorizeGrades {
     return gradesList;
   }
 
-  List<List> categorizeSemesters(List programOrder, List gradesLists) {
-    List<List<double>> categorizedGrades = [];
-    List<double> fyearFsem = [];
+  List<List<double>> removeEmptyLists(List<List<double>> list) {
+    return list.where((innerList) => innerList.isNotEmpty).toList();
+  }
 
-    List gradesList = [
-      Grades(courseCode: 'CC101', units: 3, rating: 1.3),
-      Grades(courseCode: 'CC102', units: 3, rating: 1.2),
-      Grades(courseCode: 'CS112', units: 3, rating: 1.0),
-      Grades(courseCode: 'CC105', units: 3, rating: 1.5)
-    ];
-
+  List<List<double>> categorizeSemesters(String program, List grades) {
+    List gradesList = removeNullValues(grades);
+    List<List<double>> categorizedGrades = List.generate(7, (_) => []);
+    final courseMappings = (program == 'BSCS')
+        ? csCourseMappings
+        : (program == 'BSIS')
+            ? isCourseMappings
+            : itCourseMappings;
     for (Grades grade in gradesList) {
-      switch (grade.courseCode!.toUpperCase()) {
-        case 'CC101':
-          categorizedGrades.insert(1, fyearFsem);
-          break;
-        case 'CC102':
-          fyearFsem.add(grade.rating!);
-          break;
-        case 'CC105':
+      String courseCode = grade.courseCode!.toUpperCase();
+      int categoryIndex =
+          courseMappings.indexWhere((courses) => courses.contains(courseCode));
+
+      if (categoryIndex != -1) {
+        categorizedGrades[categoryIndex].add(grade.rating!);
       }
     }
 
-    print(fyearFsem);
-    return categorizedGrades;
+    return removeEmptyLists(categorizedGrades);
   }
 }
