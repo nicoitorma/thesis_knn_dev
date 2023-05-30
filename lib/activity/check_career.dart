@@ -190,8 +190,8 @@ class _CheckCareerState extends State<CheckCareer> {
                   /// `categorizeSemesters` method from the `CategorizeGrades` class and passing in the
                   /// `gradesList` as a parameter. This method likely categorizes the grades in the
                   /// `gradesList` by semester and returns the categorized data.
-                  List<List<double>> result = categorizeGrades
-                      .categorizeSemesters(selectedCourse!, gradesList);
+                  List<List> result = categorizeGrades.categorizeSemesters(
+                      selectedCourse!, gradesList);
                   if (gradesList.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(

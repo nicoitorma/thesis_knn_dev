@@ -11,15 +11,40 @@ String check = 'Check my results';
 String noData = 'No Data Input';
 String noProgram = 'No Program selected';
 
-final List<List<String>> csCourseMappings = [
-  ['CC101', 'CC102'],
-  ['CC103', 'CS112'],
-  ['CC104', 'CC105', 'CS221'],
-  ['CS322', 'CS422', 'CS522', 'CS622', 'CS722', 'CS822', 'CSTRACKA1'],
-  ['CS931', 'CS1031', 'CS1131', 'CS1231', 'CSTRACKA2', 'CSTRACKB', 'CSTRACKC'],
-  ['CS1332', 'CS1432', 'CS1541', 'THS101', 'CSTRACKA3', 'CSTRACKD1'],
-  ['CC106', 'THS102', 'CSTRACKA4', 'CSTRACKD2', 'CSTRACKE'],
-  ['INT420']
+final List<String> csCourseMappings = [
+  'CC101',
+  'CC102',
+  'CC103',
+  'CS112',
+  'CC104',
+  'CC105',
+  'CS221',
+  'CS322',
+  'CS422',
+  'CS522',
+  'CS622',
+  'CS722',
+  'CS822',
+  'CSTRACKA1',
+  'CS931',
+  'CS1031',
+  'CS1131',
+  'CS1231',
+  'CSTRACKA2',
+  'CSTRACKB',
+  'CSTRACKC',
+  'CS1332',
+  'CS1432',
+  'CS1541',
+  'THS101',
+  'CSTRACKA3',
+  'CSTRACKD1',
+  'CC106',
+  'THS102',
+  'CSTRACKA4',
+  'CSTRACKD2',
+  'CSTRACKE',
+  'INT420'
 ];
 
 final List<List<String>> isCourseMappings = [

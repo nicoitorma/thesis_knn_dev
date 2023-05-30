@@ -1,16 +1,12 @@
 import 'dart:io';
 import 'package:ml_algo/ml_algo.dart';
-import 'package:th_knn/models/grades.dart';
-import 'package:th_knn/utils/standard_scaler.dart';
+import 'package:ml_dataframe/ml_dataframe.dart';
+import 'package:path_provider/path_provider.dart';
 
 class KnnAlgorithm {
   KnnClassifier? model;
 
-  Future getKnnModel() async {
-    final file = File('assets/knn_model/cs_knn_model.json');
-    final json = await file.readAsString();
-    model = KnnClassifier.fromJson(json);
-  }
+  Future getKnnModel() async {}
 
   applyPadding({var data}) {
     var maxSize =
@@ -27,25 +23,47 @@ class KnnAlgorithm {
     return paddedData;
   }
 
-  Future getResults(List<Grades> grades) async {
-    // DataFrame? data;
-    // List<List<double>>? filtereredGrades = [];
-    List<double>? innerList = [];
-    final scaler = StandardScaler();
+  Future ewan() async {
+    final data = <Iterable>[
+      ['feature 1', 'feature 2', 'feature 3', 'outcome'],
+      [5.0, 7.0, 6.0, 1.0],
+      [1.0, 2.0, 3.0, 0.0],
+      [10.0, 12.0, 31.0, 0.0],
+      [9.0, 8.0, 5.0, 0.0],
+      [4.0, 0.0, 1.0, 1.0],
+    ];
+    const targetName = 'outcome';
+    final samples = DataFrame(data, headerExists: true);
+    final classifier = KnnClassifier(
+      samples,
+      targetName,
+      3,
+    );
 
-    for (var grade in grades) {
-      innerList.add(grade.rating!);
-    }
+    final directory = await getApplicationDocumentsDirectory();
+    final filePath = '${directory.path}/classifier.json';
 
-    final mData = applyPadding(data: innerList);
-    scaler.fit(mData);
-    final transformedData = scaler.transform(mData);
+    await classifier.saveAsJson(filePath);
 
-    print(transformedData.runtimeType);
-    print(transformedData);
+    final file = File(filePath);
 
-    //return transformedData;
+    final json = await file.readAsString();
+    final restoredClassifier = KnnClassifier.fromJson(json);
+    print(file.absolute);
+  }
 
-    // return model?.predict(data);
+  Future getResults(List<List> grades) async {
+    final file = File('assets/knn_model/cs_knn_model.json');
+    final json = await file.readAsString();
+    print(json);
+    final mod = KnnClassifier.fromJson(json);
+    print(mod.distanceType);
+
+    var data = DataFrame(grades);
+    DataFrame? result;
+
+    result = mod.predict(data);
+
+    print(result);
   }
 }

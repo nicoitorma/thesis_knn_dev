@@ -37,7 +37,10 @@ dependencies:
   adobe_xd: ^2.0.1
   webview_flutter: ^4.2.0
   ml_algo: ^16.17.7
+  ml_preprocessing: ^7.0.2
   ml_dataframe: ^1.6.0
+  path_provider: ^2.0.15
+  csv:
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +69,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/imgs/
+    - assets/knn_model/CSDataset.csv
 
   fonts:
     - family: Poppins
