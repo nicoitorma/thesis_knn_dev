@@ -24,7 +24,7 @@ class KnnAlgorithm {
     return csvTable.map((row) => row.map((cell) => cell).toList()).toList();
   }
 
-  Future getResults(String program, List<List> grades) async {
+  Future getResults(String program, List grades) async {
     late final String dataset;
 
     switch (program) {
@@ -51,21 +51,11 @@ class KnnAlgorithm {
       1.9,
       2.5,
       2.2,
-      1.1,
-      2.3,
-      2,
-      1.5,
-      1.4,
-      2.1,
-      2.2,
-      2.1,
-      1.1,
-      1.7
     ];
 
     List<List> trainData = await parseCsv(dataset);
     dynamic result = KNN(data: trainData).classify(gradesList, 7);
 
-    print('The predicted label is: $result');
+    return result;
   }
 }
