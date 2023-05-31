@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/box_decoration.dart';
@@ -26,6 +27,7 @@ class _KnnResultState extends State<KnnResult> {
   @override
   Widget build(BuildContext context) {
     Map<dynamic, int> countMap = {};
+
     final List<Color> colors = [
       Colors.red,
       Colors.blue,
@@ -48,40 +50,56 @@ class _KnnResultState extends State<KnnResult> {
         ..sort((a, b) => countMap[b]!.compareTo(countMap[a]!));
     }
 
+    generateGroupData() {
+      final List<BarChartGroupData> barGroups = [];
+      countMap.forEach((key, value) {
+        barGroups.add(BarChartGroupData(
+            x: key,
+            barRods: [BarChartRodData(fromY: 0, toY: value.toDouble())]));
+      });
+
+      return barGroups;
+    }
+
     return Scaffold(
         appBar: AppBar(toolbarHeight: 0.0),
         body: Stack(children: [
           const BackgroundImage(),
           const Header(headerTitle: 'Your Results'),
-          Positioned.fill(
-            top: 130,
-            bottom: 20,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: FutureBuilder(
-                  future: knnAlgo.getResults(widget.program, widget.grades),
-                  builder: ((context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      List list = snapshot.data;
-                      countOccurence(list);
-                      List sortedLabels = sortLabel();
-                      return ListView.builder(
-                          itemCount: sortedLabels.length,
-                          itemBuilder: (context, index) {
-                            Color color = colors[index];
-                            String value = sortedLabels[index];
-                            return Container(
-                              decoration: tableBoxDecor(),
-                              child: Column(children: [
-                                Results(color: color, result: value)
-                              ]),
-                            );
-                          });
-                    }
-                    return const CircularProgressIndicator();
-                  })),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10.0, 130.0, 10.0, 10.0),
+            child: Column(
+              children: [
+                FutureBuilder(
+                    future: knnAlgo.getResults(widget.program, widget.grades),
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        List list = snapshot.data;
+                        countOccurence(list);
+                        List sortedLabels = sortLabel();
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: sortedLabels.length,
+                            itemBuilder: (context, index) {
+                              Color color = colors[index];
+                              String value = sortedLabels[index];
+                              return Container(
+                                decoration: tableBoxDecor(),
+                                child: Column(children: [
+                                  Results(color: color, result: value)
+                                ]),
+                              );
+                            });
+                      }
+                      return const SizedBox(
+                          height: 50,
+                          width: 50,
+                          child: CircularProgressIndicator());
+                    })),
+                BarChart(BarChartData(barGroups: generateGroupData()))
+              ],
             ),
-          )
+          ),
         ]));
   }
 }

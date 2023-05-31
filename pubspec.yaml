@@ -38,7 +38,8 @@ dependencies:
   webview_flutter: ^4.2.0
   path_provider: ^2.0.15
   csv:
-  universal_html:
+  url_launcher:
+  fl_chart: ^0.62.0
 
 dev_dependencies:
   flutter_test:

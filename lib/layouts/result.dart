@@ -11,14 +11,13 @@ class Results extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Container(
             height: 30,
             width: 30,
             color: color,
           ),
         ),
-        const SizedBox(width: 5),
         Flexible(
           child: Text(
             result,

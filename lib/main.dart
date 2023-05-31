@@ -5,6 +5,7 @@ import 'package:th_knn/layouts/box_decoration.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/values/strings.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,8 +46,15 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              GestureDetector(
-                onTap: () {},
+              InkWell(
+                borderRadius: BorderRadius.circular(20.0),
+                onTap: () async {
+                  String url = 'https://cictdev.github.io/cict-cog';
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url),
+                        mode: LaunchMode.externalNonBrowserApplication);
+                  }
+                },
                 child: Container(
                   width: 229.0,
                   height: 112.0,
@@ -63,7 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               const SizedBox(height: 15),
-              GestureDetector(
+              InkWell(
+                borderRadius: BorderRadius.circular(20.0),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (builder) => const CheckCareer())),
                 child: Container(
@@ -83,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 15),
               InkWell(
+                borderRadius: BorderRadius.circular(20.0),
                 onTap: () {},
                 child: Container(
                   width: 229.0,
