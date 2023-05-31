@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/activity/check_career.dart';
-import 'package:th_knn/activity/knn_results.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/box_decoration.dart';
 import 'package:th_knn/layouts/header.dart';
@@ -84,8 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 15),
               InkWell(
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (builder) => KnnResult())),
+                onTap: () {},
                 child: Container(
                   width: 229.0,
                   height: 112.0,

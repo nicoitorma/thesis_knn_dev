@@ -3,12 +3,11 @@ import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/utils/knn_classifier.dart';
 
-import 'cs.dart';
-
 class KnnResult extends StatefulWidget {
-  List<List>? grades;
+  final List<List> grades;
+  final String program;
 
-  KnnResult({super.key, this.grades});
+  const KnnResult({super.key, required this.program, required this.grades});
 
   @override
   State<KnnResult> createState() => _KnnResultState();
@@ -16,11 +15,9 @@ class KnnResult extends StatefulWidget {
 
 class _KnnResultState extends State<KnnResult> {
   final knnAlgo = KnnAlgorithm();
-  String? result;
 
   @override
   void initState() {
-    print(widget.grades);
     super.initState();
   }
 
@@ -32,11 +29,9 @@ class _KnnResultState extends State<KnnResult> {
         const BackgroundImage(),
         const Header(),
         FutureBuilder(
-            future: TrainKNN().train(),
+            future: knnAlgo.getResults(widget.program, widget.grades),
             builder: ((context, snapshot) {
-              return const Center(
-                child: Text(''),
-              );
+              return const Text('');
             }))
       ]),
     );

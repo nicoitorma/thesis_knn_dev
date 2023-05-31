@@ -200,7 +200,8 @@ class _CheckCareerState extends State<CheckCareer> {
                     )));
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (builder) => KnnResult(grades: result)));
+                        builder: (builder) => KnnResult(
+                            program: selectedCourse!, grades: result)));
                   }
                 },
                 child: Container(

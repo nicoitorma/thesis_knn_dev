@@ -69,6 +69,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/imgs/
+    - assets/knn_model/cs_model.json
     - assets/knn_model/CSDataset.csv
 
   fonts:
