@@ -7,7 +7,8 @@ import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/values/strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -51,8 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () async {
                   String url = 'https://cictdev.github.io/cict-cog';
                   if (await canLaunchUrl(Uri.parse(url))) {
+                    const CircularProgressIndicator();
                     await launchUrl(Uri.parse(url),
-                        mode: LaunchMode.externalNonBrowserApplication);
+                        mode: LaunchMode.platformDefault);
                   }
                 },
                 child: Container(

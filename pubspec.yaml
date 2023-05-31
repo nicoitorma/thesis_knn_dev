@@ -40,6 +40,7 @@ dependencies:
   csv:
   url_launcher:
   fl_chart: ^0.62.0
+  flutter_native_splash:
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +52,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+flutter_native_splash:
+  # background_image: assets/imgs/bg.png
+  color: "#ffffff"
+  image: assets/imgs/launch.png
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
