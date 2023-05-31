@@ -96,7 +96,7 @@ class _KnnResultState extends State<KnnResult> {
                           width: 50,
                           child: CircularProgressIndicator());
                     })),
-                BarChart(BarChartData(barGroups: generateGroupData()))
+                // BarChart(BarChartData(barGroups: generateGroupData()))
               ],
             ),
           ),

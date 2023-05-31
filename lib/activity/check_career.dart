@@ -20,13 +20,7 @@ class _CheckCareerState extends State<CheckCareer> {
   CategorizeGrades categorizeGrades = CategorizeGrades();
   String? selectedCourse;
 
-  List<Grades> gradesList = [Grades(), Grades(), Grades()];
-
-  final List<String> courseItem = [
-    'BSCS',
-    'BSIT',
-    'BSIS',
-  ];
+  List<Grades> gradesList = [Grades(), Grades()];
 
   @override
   Widget build(BuildContext context) {

@@ -11,6 +11,12 @@ String check = 'Check my results';
 String noData = 'No Data Input';
 String noProgram = 'No Program selected';
 
+final List<String> courseItem = [
+  'BSCS',
+  'BSIT',
+  'BSIS',
+];
+
 final List<String> csCourseMappings = [
   'CC101',
   'CC102',

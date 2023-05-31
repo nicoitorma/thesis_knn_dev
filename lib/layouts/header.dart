@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:th_knn/values/colors.dart';
 import 'package:th_knn/values/strings.dart';
 
 class Header extends StatelessWidget {
@@ -12,11 +13,10 @@ class Header extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
-          color: const Color(0x80ffffff),
           borderRadius: const BorderRadius.only(
             bottomRight: Radius.circular(69.0),
           ),
-          border: Border.all(width: 10.0, color: const Color(0x80707070)),
+          border: Border.all(width: 10.0, color: headerColor),
         ),
         child: Align(
           alignment: Alignment.centerLeft,
