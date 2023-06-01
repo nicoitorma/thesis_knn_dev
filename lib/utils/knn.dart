@@ -49,19 +49,6 @@ class KNN {
     return topK;
   }
 
-  // dynamic getMostFrequentLabel(List<dynamic> labels) {
-  //   Map<dynamic, int> countMap = {};
-
-  //   for (var label in labels) {
-  //     countMap[label] = (countMap[label] ?? 0) + 1;
-  //   }
-
-  //   List<dynamic> sortedLabels = countMap.keys.toList()
-  //     ..sort((a, b) => countMap[b]!.compareTo(countMap[a]!));
-
-  //   return sortedLabels;
-  // }
-
   /// The function calculates the Euclidean distance between two lists of features.
   ///
   /// Args:
