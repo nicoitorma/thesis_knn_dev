@@ -48,11 +48,10 @@ class _BarChartWidget extends StatelessWidget {
   FlTitlesData get titlesData => FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
-          axisNameSize: 40,
           axisNameWidget: Text('Results', style: customTextStyle(size: 18.0))),
       leftTitles: AxisTitles(
-        axisNameSize: 30,
-        axisNameWidget: Text('Occurence in the KNN', style: customTextStyle()),
+        axisNameWidget: Text('Occurence in the KNN',
+            textAlign: TextAlign.center, style: customTextStyle()),
         sideTitles: SideTitles(showTitles: true),
       ),
       rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),

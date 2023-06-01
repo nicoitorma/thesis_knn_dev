@@ -60,7 +60,6 @@ class _KnnResultState extends State<KnnResult> {
                   if (snapshot.connectionState == ConnectionState.done) {
                     List list = snapshot.data;
                     List sortedLabels = sortLabel(list);
-
                     return Column(
                       children: [
                         Expanded(
@@ -71,6 +70,7 @@ class _KnnResultState extends State<KnnResult> {
                                 String value = sortedLabels[index];
                                 Color color =
                                     colors[sortedLabels.indexOf(value)];
+                                print(sortedLabels);
                                 return Container(
                                   decoration: tableBoxDecor(),
                                   child: Column(children: [
