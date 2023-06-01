@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:th_knn/layouts/text_style.dart';
+import 'package:th_knn/values/colors.dart';
+import 'package:th_knn/values/strings.dart';
 
 class _BarChartWidget extends StatelessWidget {
   final Map data;
@@ -17,16 +19,16 @@ class _BarChartWidget extends StatelessWidget {
         barGroups: barGroups,
         gridData: FlGridData(show: false),
         alignment: BarChartAlignment.spaceAround,
-        maxY: 4,
+        maxY: data.length.toDouble(),
       ),
     );
   }
 
   BarTouchData get barTouchData => BarTouchData(
-        enabled: false,
+        enabled: true,
         touchTooltipData: BarTouchTooltipData(
-          tooltipBgColor: Colors.transparent,
-          tooltipPadding: EdgeInsets.zero,
+          tooltipBgColor: customBoxColorOrig,
+          tooltipPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           tooltipMargin: 8,
           getTooltipItem: (
             BarChartGroupData group,
@@ -48,11 +50,13 @@ class _BarChartWidget extends StatelessWidget {
   FlTitlesData get titlesData => FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
-          axisNameWidget: Text('Results', style: customTextStyle(size: 18.0))),
+          axisNameSize: 30,
+          axisNameWidget: Text(result, style: customTextStyle(size: 18.0))),
       leftTitles: AxisTitles(
-        axisNameWidget: Text('Occurence in the KNN',
+        axisNameSize: 20,
+        axisNameWidget: Text(occurence,
             textAlign: TextAlign.center, style: customTextStyle()),
-        sideTitles: SideTitles(showTitles: true),
+        sideTitles: SideTitles(showTitles: true, reservedSize: 30),
       ),
       rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
       topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)));

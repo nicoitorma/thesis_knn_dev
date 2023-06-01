@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/header.dart';
+import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/utils/knn_classifier.dart';
+import 'package:th_knn/values/strings.dart';
 
 import '../layouts/barchart.dart';
 import '../layouts/box_decoration.dart';
 import '../layouts/result.dart';
 
 class KnnResult extends StatefulWidget {
-  final List<List> grades;
+  final List grades;
   final String program;
 
   const KnnResult({super.key, required this.program, required this.grades});
@@ -43,6 +45,7 @@ class _KnnResultState extends State<KnnResult> {
       for (var label in list) {
         countMap[label] = (countMap[label] ?? 0) + 1;
       }
+
       return countMap.keys.toList()
         ..sort((a, b) => countMap[b]!.compareTo(countMap[a]!));
     }
@@ -57,29 +60,43 @@ class _KnnResultState extends State<KnnResult> {
             child: FutureBuilder(
                 future: knnAlgo.getResults(widget.program, widget.grades),
                 builder: ((context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    List list = snapshot.data;
+                  if (snapshot.hasData &&
+                      snapshot.connectionState == ConnectionState.done) {
+                    var list = snapshot.data;
                     List sortedLabels = sortLabel(list);
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: sortedLabels.length,
-                              itemBuilder: (context, index) {
-                                String value = sortedLabels[index];
-                                Color color =
-                                    colors[sortedLabels.indexOf(value)];
-                                print(sortedLabels);
-                                return Container(
-                                  decoration: tableBoxDecor(),
-                                  child: Column(children: [
-                                    Results(color: color, result: value)
-                                  ]),
-                                );
-                              }),
+                        Flexible(
+                            child: Container(
+                                decoration: tableBoxDecor(),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0.0, 20, 0, 0),
+                                  child: BarChartWidget(
+                                      data: countMap, colors: colors),
+                                ))),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          child: Text(legends,
+                              textAlign: TextAlign.start,
+                              style: customTextStyle()),
                         ),
-                        BarChartWidget(data: countMap, colors: colors)
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: sortedLabels.length,
+                            itemBuilder: (context, index) {
+                              String value = sortedLabels[index];
+                              Color color = colors[sortedLabels.indexOf(value)];
+
+                              return Container(
+                                decoration: tableBoxDecor(),
+                                child: Column(children: [
+                                  Results(
+                                      color: color, result: sortedLabels[index])
+                                ]),
+                              );
+                            }),
                       ],
                     );
                   }

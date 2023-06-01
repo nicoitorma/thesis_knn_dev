@@ -37,124 +37,47 @@ class _CheckCareerState extends State<CheckCareer> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                /// The code below is creating a dropdown menu with a label and a list of options. The
-                /// label is the value of the variable 'program' and the options are the values in the
-                /// list 'courseItem'. When an option is selected, the value of the variable
-                /// 'selectedCourse' is updated with the selected option and the UI is rebuilt with the
-                /// new value. The code also applies some padding and decoration to the container that
-                /// holds the dropdown menu.
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: tableBoxDecor(),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text('$program: ',
-                              style: customTextStyle(size: 20.0)),
-                          DropdownButton<String>(
-                            style: customTextStyle(size: 20.0),
-                            hint: Text(program),
-                            value: selectedCourse,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedCourse = value!;
-                              });
-                            },
-                            items: courseItem.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ]),
-                  ),
-                ),
+                programDropdown(),
                 Flexible(
-                  child: InkWell(
-                    onTap: () {
-                      if (selectedCourse == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(noProgram,
-                                style: customTextStyle(
-                                    size: 20.0, color: Colors.red))));
-                      }
-                    },
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: IgnorePointer(
-                        ignoring: selectedCourse == null,
-                        child: Table(
-                          defaultColumnWidth: const FlexColumnWidth(),
-                          children: [
-                            TableRow(children: [
-                              GradeContainer(courseCode),
-                              GradeContainer(units),
-                              GradeContainer(rating)
-                            ]),
-                            ...gradesList.map((data) {
-                              return TableRow(children: [
-                                /// This code is creating a `Container` widget that contains a `TextField`
-                                /// widget. The `TextField` widget is used to allow the user to input a
-                                /// value for the `rating` property of a `Grades` object. The `onChanged`
-                                /// callback function is triggered whenever the user types a new value into
-                                /// the `TextField`. This function updates the `rating` property of the
-                                /// corresponding `Grades` object in the `gradesList` list with the new
-                                /// value entered by the user. The `tableBoxDecoration()` function is used
-                                /// to apply a custom decoration to the `Container` widget, which likely
-                                /// includes a border and background color to make the table look more
-                                /// visually appealing.
-                                Container(
-                                  decoration: tableBoxDecor(),
-                                  child: TextField(
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none),
-                                    textAlign: TextAlign.center,
-                                    onChanged: (value) {
-                                      data.courseCode = value;
-                                    },
-                                  ),
-                                ),
-                                Container(
-                                  decoration: tableBoxDecor(),
-                                  child: TextField(
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none),
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
-                                    onChanged: (value) {
-                                      data.units = int.tryParse(value);
-                                    },
-                                  ),
-                                ),
-                                Container(
-                                  decoration: tableBoxDecor(),
-                                  child: TextField(
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none),
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
-                                    onChanged: (value) {
-                                      data.rating = double.tryParse(value);
-                                    },
-                                  ),
-                                ),
-                              ]);
-                            }).toList(),
-                          ],
-                        ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: IgnorePointer(
+                      ignoring: selectedCourse == null,
+                      child: Table(
+                        defaultColumnWidth: const FlexColumnWidth(),
+                        children: [
+                          TableRow(children: [
+                            GradeContainer(courseCode),
+                            GradeContainer(units),
+                            GradeContainer(rating),
+                          ]),
+                          ...gradesList.map((data) {
+                            return TableRow(children: [
+                              buildTextFieldContainer(
+                                onChanged: (value) {
+                                  data.courseCode = value;
+                                },
+                              ),
+                              buildTextFieldContainer(
+                                keyboardType: TextInputType.number,
+                                onChanged: (value) {
+                                  data.units = int.tryParse(value);
+                                },
+                              ),
+                              buildTextFieldContainer(
+                                keyboardType: TextInputType.number,
+                                onChanged: (value) {
+                                  data.rating = double.tryParse(value);
+                                },
+                              ),
+                            ]);
+                          }),
+                        ],
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 30),
-
-                /// This code is creating a floating action button with a circular shape and an "add"
-                /// icon. When the button is pressed, it adds a new instance of the `Grades` class to
-                /// the `gradesList` list and triggers a state update using the `setState()` method.
-                /// This will cause the UI to rebuild and display the new row in the table.
                 FloatingActionButton(
                   shape: const CircleBorder(),
                   backgroundColor: Colors.grey,
@@ -168,51 +91,94 @@ class _CheckCareerState extends State<CheckCareer> {
               ],
             ),
           ),
-
-          /// This is a `Inkwell` widget that is used to detect a tap gesture on the container
-          /// that displays the "Check my results" text. When the container is tapped, the `removeNullValues()`
-          /// function is called to remove any objects from the `gradesList` list that have null values
-          /// for certain properties. This is likely used to ensure that the user has entered valid data
-          /// before proceeding with the "Check my result" action.
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: InkWell(
-                onTap: () {
-                  /// `categorizeGrades.categorizeSemesters(gradesList);` is calling the
-                  /// `categorizeSemesters` method from the `CategorizeGrades` class and passing in the
-                  /// `gradesList` as a parameter. This method likely categorizes the grades in the
-                  /// `gradesList` by semester and returns the categorized data.
-                  List<List> result = categorizeGrades.categorizeSemesters(
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: InkWell(
+              onTap: () {
+                if (gradesList.length > 1) {
+                  List result = categorizeGrades.categorizeSemesters(
                       selectedCourse!, gradesList);
-                  if (gradesList.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(
-                      noData,
-                      style: customTextStyle(size: 20.0, color: Colors.white),
-                    )));
-                  } else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (builder) => KnnResult(
-                            program: selectedCourse!, grades: result)));
-                  }
-                },
-                child: Container(
-                  decoration: checkResBoxDecor(),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15.0, vertical: 10),
-                    child: Text(check,
-                        style: customTextStyle(
-                            size: 20.0, fontWeight: FontWeight.w700)),
-                  ),
-                ),
-              ),
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (builder) =>
+                          KnnResult(program: selectedCourse!, grades: result),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        insufficientData,
+                        style: customTextStyle(size: 20.0, color: Colors.white),
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: buildCheckResultsContainer(),
             ),
           ),
         ],
       ),
     );
   }
+
+  Widget buildTextFieldContainer({
+    String value = '',
+    TextInputType keyboardType = TextInputType.text,
+    required ValueChanged<String> onChanged,
+  }) {
+    return Container(
+      decoration: tableBoxDecor(),
+      child: TextFormField(
+        decoration: const InputDecoration(border: InputBorder.none),
+        keyboardType: keyboardType,
+        textAlign: TextAlign.center,
+        initialValue: value,
+        onChanged: onChanged,
+      ),
+    );
+  }
+
+  Widget buildCheckResultsContainer() {
+    return Container(
+      decoration: checkResBoxDecor(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+        child: Text(
+          check,
+          style: customTextStyle(size: 20.0, fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+  }
+
+  programDropdown() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: tableBoxDecor(),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text('$program: ', style: customTextStyle(size: 20.0)),
+                DropdownButton<String>(
+                  style: customTextStyle(size: 20.0),
+                  hint: Text(program),
+                  value: selectedCourse,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedCourse = value!;
+                    });
+                  },
+                  items: courseItem.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ]),
+        ),
+      );
 }

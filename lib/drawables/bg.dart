@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:th_knn/values/colors.dart';
 
 class BackgroundImage extends StatelessWidget {
   const BackgroundImage({super.key});
@@ -6,9 +7,9 @@ class BackgroundImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Color.fromARGB(50, 58, 183, 241), Colors.blue],
+                colors: [const Color.fromARGB(50, 58, 183, 241), darkBlue],
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft)));
 
