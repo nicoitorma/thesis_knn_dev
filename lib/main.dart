@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            btn2,
+            text,
             style: customTextStyle(size: 20.0),
             textAlign: TextAlign.center,
             softWrap: false,
