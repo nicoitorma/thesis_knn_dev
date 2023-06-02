@@ -1,6 +1,6 @@
-# th_knn
+# Online CICT Career Guidance App
 
-A new Flutter project.
+A thesis project created to provide CICT students identify their future endeavors in the fields of Computer using KNN Algorithm.
 
 ## Getting Started
 

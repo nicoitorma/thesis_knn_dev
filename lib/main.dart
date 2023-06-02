@@ -74,7 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 15),
               InkWell(
-                borderRadius: BorderRadius.circular(20.0),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                     builder: (builder) => const CheckCareer())),
                 child: Container(
@@ -94,8 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 15),
               InkWell(
-                borderRadius: BorderRadius.circular(20.0),
-                onTap: () {},
                 child: Container(
                   width: 229.0,
                   height: 112.0,

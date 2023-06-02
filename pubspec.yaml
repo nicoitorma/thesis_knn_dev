@@ -41,6 +41,7 @@ dependencies:
   url_launcher:
   fl_chart: ^0.62.0
   flutter_native_splash:
+  animations: ^2.0.7
 
 dev_dependencies:
   flutter_test:
