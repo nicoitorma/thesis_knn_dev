@@ -23,7 +23,6 @@ class KnnAlgorithm {
         dataset = await rootBundle.loadString('assets/knn_model/CSDataset.csv');
         break;
     }
-    print('CLASSIFIER: $gradesList');
     List<List> trainData = await parseCsv(dataset);
     result = KNN(data: trainData).classify(gradesList, 7);
 

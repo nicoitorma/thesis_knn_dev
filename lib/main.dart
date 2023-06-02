@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/activity/check_career.dart';
+import 'package:th_knn/activity/skills_recom.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/box_decoration.dart';
 import 'package:th_knn/layouts/header.dart';
@@ -37,6 +38,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  container(String text) => Container(
+        width: 229.0,
+        height: 112.0,
+        decoration: customBoxDecor(),
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            btn2,
+            style: customTextStyle(size: 20.0),
+            textAlign: TextAlign.center,
+            softWrap: false,
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,39 +90,34 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 15),
               InkWell(
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (builder) => const CheckCareer())),
-                child: Container(
-                  width: 229.0,
-                  height: 112.0,
-                  decoration: customBoxDecor(),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      btn2,
-                      style: customTextStyle(size: 20.0),
-                      textAlign: TextAlign.center,
-                      softWrap: false,
-                    ),
-                  ),
-                ),
-              ),
+                  onTap: () => Navigator.of(context).push(PageRouteBuilder(
+                      transitionDuration: const Duration(milliseconds: 400),
+                      transitionsBuilder:
+                          ((context, animation, secondaryAnimation, child) =>
+                              SlideTransition(
+                                  position: Tween(
+                                          begin: const Offset(1.0, 0.0),
+                                          end: const Offset(0.0, 0.0))
+                                      .animate(animation),
+                                  child: child)),
+                      pageBuilder: (context, animation, anotherAnimation) =>
+                          const CheckCareer())),
+                  child: container(btn2)),
               const SizedBox(height: 15),
               InkWell(
-                child: Container(
-                  width: 229.0,
-                  height: 112.0,
-                  decoration: customBoxDecor(),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      btn3,
-                      style: customTextStyle(size: 20.0),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              )
+                  onTap: () => Navigator.of(context).push(PageRouteBuilder(
+                      transitionDuration: const Duration(milliseconds: 400),
+                      transitionsBuilder:
+                          ((context, animation, secondaryAnimation, child) =>
+                              SlideTransition(
+                                  position: Tween(
+                                          begin: const Offset(1.0, 0.0),
+                                          end: const Offset(0.0, 0.0))
+                                      .animate(animation),
+                                  child: child)),
+                      pageBuilder: (context, animation, anotherAnimation) =>
+                          const SkillsRecom())),
+                  child: container(btn3))
             ]),
           )
         ]));

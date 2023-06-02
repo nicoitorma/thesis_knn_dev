@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/box_decoration.dart';
-import 'package:th_knn/layouts/grade_container.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/models/grades.dart';
@@ -17,6 +16,12 @@ class CheckCareer extends StatefulWidget {
 }
 
 class _CheckCareerState extends State<CheckCareer> {
+  @override
+  void initState() {
+    const CircularProgressIndicator();
+    super.initState();
+  }
+
   CategorizeGrades categorizeGrades = CategorizeGrades();
   String? selectedCourse;
 
@@ -39,6 +44,7 @@ class _CheckCareerState extends State<CheckCareer> {
               children: [
                 programDropdown(),
                 Flexible(
+                  fit: FlexFit.tight,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: IgnorePointer(
@@ -152,6 +158,16 @@ class _CheckCareerState extends State<CheckCareer> {
       ),
     );
   }
+
+  GradeContainer(String title) => Container(
+      height: 50,
+      decoration: tableBoxDecor(),
+      child: Center(
+        child: Text(
+          title,
+          style: customTextStyle(),
+        ),
+      ));
 
   programDropdown() => Padding(
         padding: const EdgeInsets.all(8.0),
