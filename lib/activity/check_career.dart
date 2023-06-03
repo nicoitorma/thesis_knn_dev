@@ -16,12 +16,6 @@ class CheckCareer extends StatefulWidget {
 }
 
 class _CheckCareerState extends State<CheckCareer> {
-  @override
-  void initState() {
-    const CircularProgressIndicator();
-    super.initState();
-  }
-
   CategorizeGrades categorizeGrades = CategorizeGrades();
   String? selectedCourse;
 
@@ -53,9 +47,9 @@ class _CheckCareerState extends State<CheckCareer> {
                         defaultColumnWidth: const FlexColumnWidth(),
                         children: [
                           TableRow(children: [
-                            GradeContainer(courseCode),
-                            GradeContainer(units),
-                            GradeContainer(rating),
+                            gradeContainer(courseCode),
+                            gradeContainer(units),
+                            gradeContainer(rating),
                           ]),
                           ...gradesList.map((data) {
                             return TableRow(children: [
@@ -159,7 +153,7 @@ class _CheckCareerState extends State<CheckCareer> {
     );
   }
 
-  GradeContainer(String title) => Container(
+  gradeContainer(String title) => Container(
       height: 50,
       decoration: tableBoxDecor(),
       child: Center(

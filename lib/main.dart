@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:th_knn/activity/check_career.dart';
 import 'package:th_knn/activity/skills_recom.dart';
 import 'package:th_knn/drawables/bg.dart';
@@ -55,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    const Duration duration = Duration(milliseconds: 300);
     return Scaffold(
         appBar: AppBar(toolbarHeight: 0.0),
         body: Stack(children: [
@@ -90,34 +92,24 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 15),
               InkWell(
-                  onTap: () => Navigator.of(context).push(PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 400),
-                      transitionsBuilder:
-                          ((context, animation, secondaryAnimation, child) =>
-                              SlideTransition(
-                                  position: Tween(
-                                          begin: const Offset(1.0, 0.0),
-                                          end: const Offset(0.0, 0.0))
-                                      .animate(animation),
-                                  child: child)),
-                      pageBuilder: (context, animation, anotherAnimation) =>
-                          const CheckCareer())),
-                  child: container(btn2)),
+                onTap: () => Navigator.of(context).push(PageTransition(
+                    type: PageTransitionType.rightToLeftJoined,
+                    child: const CheckCareer(),
+                    duration: duration,
+                    reverseDuration: duration,
+                    childCurrent: widget)),
+                child: container(btn2),
+              ),
               const SizedBox(height: 15),
               InkWell(
-                  onTap: () => Navigator.of(context).push(PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 400),
-                      transitionsBuilder:
-                          ((context, animation, secondaryAnimation, child) =>
-                              SlideTransition(
-                                  position: Tween(
-                                          begin: const Offset(1.0, 0.0),
-                                          end: const Offset(0.0, 0.0))
-                                      .animate(animation),
-                                  child: child)),
-                      pageBuilder: (context, animation, anotherAnimation) =>
-                          const SkillsRecom())),
-                  child: container(btn3))
+                onTap: () => Navigator.of(context).push(PageTransition(
+                    type: PageTransitionType.rightToLeftJoined,
+                    child: const SkillsRecom(),
+                    duration: duration,
+                    reverseDuration: duration,
+                    childCurrent: widget)),
+                child: container(btn3),
+              ),
             ]),
           )
         ]));
