@@ -5,10 +5,6 @@ class KNN {
 
   const KNN({required this.data});
 
-  /// The function takes a list of features and an integer k, calculates the Euclidean distance between
-  /// the features and instances in a dataset, and returns the most common label among the k nearest
-  /// instances.
-  ///
   /// Args:
   ///   features (List<dynamic>): A list of dynamic values representing the features of an instance to
   /// be classified.
@@ -20,12 +16,6 @@ class KNN {
   dynamic classify(List<dynamic> features, int k) {
     List<Map<String, dynamic>> distances = [];
 
-    /// This code block is iterating over the `data` list and calculating the Euclidean distance between
-    /// the `features` argument and each instance in the `data` list. It does this by creating a list of
-    /// maps called `distances`, where each map contains the distance between the `features` argument
-    /// and an instance in the `data` list, as well as the label of that instance. The
-    /// `calculateEuclideanDistance` function is used to calculate the distance between the `features`
-    /// argument and each instance's features.
     for (var i = 0; i < data.length; i++) {
       List<dynamic> instance = data[i];
       List<dynamic> instanceFeatures = instance.sublist(0, instance.length - 1);

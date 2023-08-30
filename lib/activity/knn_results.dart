@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:th_knn/utils/rate_prediction.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
@@ -79,7 +78,7 @@ class _KnnResultState extends State<KnnResult> {
           const BackgroundImage(),
           const Header(headerTitle: 'Your Results'),
           Padding(
-            padding: const EdgeInsets.fromLTRB(5.0, 100, 5.0, 0),
+            padding: const EdgeInsets.fromLTRB(10.0, 150, 10.0, 0),
             child: FutureBuilder(
                 future: knnAlgo.getResults(widget.program, widget.grades),
                 builder: ((context, snapshot) {
@@ -129,37 +128,6 @@ class _KnnResultState extends State<KnnResult> {
                       child: Center(child: CircularProgressIndicator()));
                 })),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0, top: 10),
-              child: InkWell(
-                  onTap: () {
-                    //     showDialog(context: context, builder: (context) {
-                    //       return AnimatedRatingStars(
-                    //   initialRating: 2.5,
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       rating = value;
-                    //     });
-                    //   },
-                    //   displayRatingValue: true, // Display the rating value
-                    //   interactiveTooltips: true, // Allow toggling half-star state
-                    //   customFilledIcon: Icons.star,
-                    //   customHalfFilledIcon: Icons.star_half,
-                    //   customEmptyIcon: Icons.star_border,
-                    //   starSize: 40.0,
-                    //   animationDuration: const Duration(milliseconds: 500),
-                    //   animationCurve: Curves.easeInOut,
-                    // ),
-                    //     });
-
-                    saveGradeToOnline(
-                        widget.gradesList, widget.program, widget.idNum);
-                  },
-                  child: rateButton()),
-            ),
-          )
         ]));
   }
 }

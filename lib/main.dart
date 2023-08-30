@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:th_knn/activity/check_career.dart';
@@ -9,8 +10,15 @@ import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/values/strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'firebase_options.dart';
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  // initialize the database
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

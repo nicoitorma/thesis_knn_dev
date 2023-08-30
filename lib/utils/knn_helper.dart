@@ -14,13 +14,13 @@ class KnnHelper {
     dynamic result;
     switch (program) {
       case 'BSCS':
-        dataset = await rootBundle.loadString('assets/datasets/CSDataset.csv');
+        dataset = await rootBundle.loadString('assets/knn_model/CSDataset.csv');
         break;
       case 'BSIT':
-        dataset = await rootBundle.loadString('assets/datasets/CSDataset.csv');
+        dataset = await rootBundle.loadString('assets/knn_model/CSDataset.csv');
         break;
       case 'BSIS':
-        dataset = await rootBundle.loadString('assets/datasets/CSDataset.csv');
+        dataset = await rootBundle.loadString('assets/knn_model/CSDataset.csv');
         break;
     }
     List<List> trainData = await parseCsv(dataset);

@@ -9,13 +9,14 @@ String units = 'Units';
 String rating = 'Rating';
 String check = 'Check my results';
 String noData = 'No Data Input';
-String insufficientData = 'Insufficient Grades';
+String insufficientData = 'Insufficient Data';
 String noProgram = 'No Program selected';
 String legends = 'Legends';
 String result = 'KNN Algorithm Results';
 String occurence = 'Occurence';
-String labelCollection = 'saved_grades';
 String labelIdNum = 'ID Number';
+
+String labelCollection = 'saved_grades';
 
 final List<String> courseItem = [
   'BSCS',

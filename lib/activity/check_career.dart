@@ -5,6 +5,7 @@ import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/models/grades.dart';
 import 'package:th_knn/utils/categorize_grades.dart';
+import '../layouts/grade_containers.dart';
 import '../values/strings.dart';
 import 'knn_results.dart';
 
@@ -21,13 +22,14 @@ class _CheckCareerState extends State<CheckCareer> {
   String idNum = '';
   final idNumController = TextEditingController();
 
+  List<Grades> gradesList = [Grades(), Grades()];
+
   @override
   void dispose() {
+    // Clean up the controller when the widget is disposed.
     idNumController.dispose();
     super.dispose();
   }
-
-  List<Grades> gradesList = [Grades(), Grades()];
 
   @override
   Widget build(BuildContext context) {
@@ -38,68 +40,71 @@ class _CheckCareerState extends State<CheckCareer> {
           const BackgroundImage(),
           const Header(headerTitle: 'Enter your grades'),
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Container(
               decoration: tableBoxDecor(),
               margin: const EdgeInsets.only(top: 100),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Flexible(
-                    child: TextField(
-                      controller: idNumController,
-                      onSubmitted: (value) {
-                        if (value.isNotEmpty) {
-                          idNum = value;
-                        }
-                      },
-                      decoration: InputDecoration(
-                          hintText: labelIdNum,
-                          hintStyle: const TextStyle(
-                              fontFamily: 'Poppins', fontSize: 18.0)),
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Flexible(
+                      child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: TextField(
+                            controller: idNumController,
+                            onSubmitted: (value) {
+                              if (value.isNotEmpty) {
+                                idNum = value.toString();
+                              }
+                            },
+                            style: customTextStyle(size: 20.0),
+                            decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'ID Number',
+                                hintStyle: TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 18)),
+                          )),
                     ),
-                  ),
-                  Flexible(
-                    child: DropdownButton<String>(
-                      style: customTextStyle(size: 20.0),
-                      hint: Text(program),
-                      value: selectedCourse,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedCourse = value!;
-                        });
-                      },
-                      items: courseItem.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+                    Flexible(
+                      child: DropdownButton<String>(
+                        style: customTextStyle(size: 20.0),
+                        hint: Text(program),
+                        value: selectedCourse,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedCourse = value!;
+                          });
+                        },
+                        items: courseItem.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ]),
             ),
           ),
           Positioned.fill(
-            top: 180,
+            top: 190,
             bottom: 80,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: IgnorePointer(
-                        ignoring: (idNum == '') && (selectedCourse == null),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Opacity(
-                            opacity: (idNum == '') && (selectedCourse == null)
-                                ? 0.5
-                                : 1.0,
+                child: IgnorePointer(
+                  ignoring: (idNum == '') && (selectedCourse == null),
+                  child: Opacity(
+                    opacity:
+                        (idNum == '') && (selectedCourse == null) ? 0.5 : 1.0,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
                             child: Table(
                               defaultColumnWidth: const FlexColumnWidth(),
                               children: [
@@ -133,20 +138,20 @@ class _CheckCareerState extends State<CheckCareer> {
                             ),
                           ),
                         ),
-                      ),
+                        const SizedBox(height: 30),
+                        FloatingActionButton(
+                          shape: const CircleBorder(),
+                          backgroundColor: Colors.grey,
+                          onPressed: () {
+                            setState(() {
+                              gradesList.add(Grades());
+                            });
+                          },
+                          child: const Icon(Icons.add),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 30),
-                    FloatingActionButton(
-                      shape: const CircleBorder(),
-                      backgroundColor: Colors.grey,
-                      onPressed: () {
-                        setState(() {
-                          gradesList.add(Grades());
-                        });
-                      },
-                      child: const Icon(Icons.add),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -157,7 +162,7 @@ class _CheckCareerState extends State<CheckCareer> {
               padding: const EdgeInsets.only(bottom: 8.0),
               child: InkWell(
                 onTap: () {
-                  if ((gradesList.length) > 1 &&
+                  if ((gradesList.length > 1) &&
                       (selectedCourse != null) &&
                       (idNum != '')) {
                     List result = categorizeGrades.categorizeSemesters(
@@ -165,9 +170,9 @@ class _CheckCareerState extends State<CheckCareer> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (builder) => KnnResult(
+                          gradesList: gradesList,
                           program: selectedCourse!,
                           grades: result,
-                          gradesList: gradesList,
                           idNum: idNum,
                         ),
                       ),
@@ -184,7 +189,7 @@ class _CheckCareerState extends State<CheckCareer> {
                     );
                   }
                 },
-                child: checkResultsContainer(),
+                child: checkResultsButtton(),
               ),
             ),
           ),
@@ -210,7 +215,7 @@ class _CheckCareerState extends State<CheckCareer> {
     );
   }
 
-  Widget checkResultsContainer() {
+  Widget checkResultsButtton() {
     return Container(
       decoration: checkResBoxDecor(),
       child: Padding(
@@ -222,14 +227,4 @@ class _CheckCareerState extends State<CheckCareer> {
       ),
     );
   }
-
-  gradeContainer(String title) => Container(
-      height: 50,
-      decoration: tableBoxDecor(),
-      child: Center(
-        child: Text(
-          title,
-          style: customTextStyle(),
-        ),
-      ));
 }
