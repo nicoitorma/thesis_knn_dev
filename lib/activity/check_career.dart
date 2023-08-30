@@ -4,7 +4,7 @@ import 'package:th_knn/layouts/box_decoration.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/models/grades.dart';
-import 'package:th_knn/utils/categorize_grades.dart';
+import 'package:th_knn/controllers/categorize_grades.dart';
 import '../layouts/grade_containers.dart';
 import '../values/strings.dart';
 import 'knn_results.dart';
@@ -117,7 +117,7 @@ class _CheckCareerState extends State<CheckCareer> {
                                   return TableRow(children: [
                                     buildTextFieldContainer(
                                       onChanged: (value) {
-                                        data.courseCode = value;
+                                        data.courseCode = value.toUpperCase();
                                       },
                                     ),
                                     buildTextFieldContainer(

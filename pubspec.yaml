@@ -36,6 +36,7 @@ dependencies:
   page_transition:
   firebase_core: ^2.15.1
   cloud_firestore: ^4.9.0
+  smooth_star_rating_null_safety: ^1.0.4+2
 
 dev_dependencies:
   flutter_test:

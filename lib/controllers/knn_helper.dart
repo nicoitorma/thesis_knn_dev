@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'knn.dart';
 
-class KnnAlgorithm {
+class KnnHelper {
   Future<List<List>> parseCsv(String csvData) async {
     List<List<dynamic>> csvTable = const CsvToListConverter().convert(csvData);
     return csvTable.map((row) => row.map((cell) => cell).toList()).toList();
@@ -24,7 +24,7 @@ class KnnAlgorithm {
         break;
     }
     List<List> trainData = await parseCsv(dataset);
-    result = KNN(data: trainData).classify(gradesList, 7);
+    result = KNN(data: trainData).classify(gradesList, 10);
 
     return result;
   }

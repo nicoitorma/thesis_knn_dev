@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
-import 'package:th_knn/utils/knn_helper.dart';
+import 'package:th_knn/controllers/knn_helper.dart';
 import 'package:th_knn/values/strings.dart';
 
 import '../layouts/barchart.dart';
 import '../layouts/box_decoration.dart';
 import '../layouts/result.dart';
 import '../models/grades.dart';
+import '../controllers/rate_prediction.dart';
 
 class KnnResult extends StatefulWidget {
   final List<Grades> gradesList;
@@ -29,10 +31,20 @@ class KnnResult extends StatefulWidget {
 
 class _KnnResultState extends State<KnnResult> {
   final knnAlgo = KnnHelper();
+  double predRating = 3;
+  String? expectedCareer;
+  List sortedLabels = [];
+  final careerCtrl = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    careerCtrl.dispose();
+    super.dispose();
   }
 
   Widget rateButton() {
@@ -51,7 +63,7 @@ class _KnnResultState extends State<KnnResult> {
   @override
   Widget build(BuildContext context) {
     Map<dynamic, int> countMap = {};
-    double rating = 3;
+
     final List<Color> colors = [
       Colors.red,
       Colors.orange,
@@ -78,14 +90,16 @@ class _KnnResultState extends State<KnnResult> {
           const BackgroundImage(),
           const Header(headerTitle: 'Your Results'),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10.0, 150, 10.0, 0),
+            padding: const EdgeInsets.fromLTRB(8.0, 100, 8.0, 0),
             child: FutureBuilder(
                 future: knnAlgo.getResults(widget.program, widget.grades),
                 builder: ((context, snapshot) {
                   if (snapshot.hasData &&
                       snapshot.connectionState == ConnectionState.done) {
                     var list = snapshot.data;
-                    List sortedLabels = sortLabel(list);
+                    sortedLabels = sortLabel(list);
+                    print(list);
+                    print(countMap);
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -128,6 +142,83 @@ class _KnnResultState extends State<KnnResult> {
                       child: Center(child: CircularProgressIndicator()));
                 })),
           ),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0, top: 10),
+                child: InkWell(
+                    child: rateButton(),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      saveGradeToOnline(
+                                          widget.gradesList,
+                                          widget.program,
+                                          widget.idNum,
+                                          expectedCareer ?? sortedLabels[0]);
+                                    },
+                                    child: const Text('OK')),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Cancel')),
+                              ],
+                              content:
+                                  StatefulBuilder(builder: (context, setState) {
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('Rate the prediction',
+                                        style: customTextStyle(size: 16.0)),
+                                    SmoothStarRating(
+                                        rating: predRating,
+                                        size: 30,
+                                        filledIconData: Icons.star,
+                                        halfFilledIconData: Icons.star_half,
+                                        defaultIconData: Icons.star_border,
+                                        starCount: 5,
+                                        color: Colors.blue,
+                                        borderColor: Colors.blue,
+                                        allowHalfRating: false,
+                                        spacing: 2.0,
+                                        onRatingChanged: (value) {
+                                          setState(() {
+                                            predRating = value;
+                                          });
+                                        }),
+                                    if (predRating < 3)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 5.0),
+                                        child: TextField(
+                                          controller: careerCtrl,
+                                          onChanged: (value) {
+                                            if (value.isNotEmpty) {
+                                              expectedCareer = value.toString();
+                                            }
+                                          },
+                                          style: customTextStyle(size: 20.0),
+                                          decoration: const InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              hintText: 'Expected Career',
+                                              hintStyle: TextStyle(
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 18)),
+                                        ),
+                                      )
+                                  ],
+                                );
+                              }),
+                            );
+                          });
+                    }),
+              ))
         ]));
   }
 }

@@ -5,7 +5,8 @@ import '../values/strings.dart';
 
 final _db = FirebaseFirestore.instance;
 
-saveGradeToOnline(List<Grades> grades, String program, String idNum) async {
+saveGradeToOnline(List<Grades> grades, String program, String? idNum,
+    String expectedCareer) async {
   Map<String, dynamic> dataMap = {};
 
   for (int i = 0; i < grades.length; i++) {
@@ -15,6 +16,7 @@ saveGradeToOnline(List<Grades> grades, String program, String idNum) async {
     Map<String, dynamic> unitRatingMap = {
       'rating': rating,
       'units': unit,
+      'career': expectedCareer
     };
     dataMap[grades[i].courseCode!] = unitRatingMap;
   }
