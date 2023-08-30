@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "323445399245",
+    "project_id": "ocg-knn",
+    "storage_bucket": "ocg-knn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323445399245:android:322828d07f35eb54cd5384",
+        "android_client_info": {
+          "package_name": "com.example.th_knn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323445399245-urpokrv9kh8rd4jlk2gjmb4tc0rk4ra3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu82myA7LROcEPtJlhkrT3SsYo07fgUIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323445399245-urpokrv9kh8rd4jlk2gjmb4tc0rk4ra3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

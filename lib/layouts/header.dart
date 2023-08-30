@@ -9,7 +9,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 120,
+        height: 90,
         padding: const EdgeInsets.symmetric(horizontal: 30),
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(

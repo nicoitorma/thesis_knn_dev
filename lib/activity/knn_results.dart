@@ -1,35 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:th_knn/utils/rate_prediction.dart';
 import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/layouts/header.dart';
 import 'package:th_knn/layouts/text_style.dart';
-import 'package:th_knn/utils/knn_classifier.dart';
+import 'package:th_knn/utils/knn_helper.dart';
 import 'package:th_knn/values/strings.dart';
 
 import '../layouts/barchart.dart';
 import '../layouts/box_decoration.dart';
 import '../layouts/result.dart';
+import '../models/grades.dart';
 
 class KnnResult extends StatefulWidget {
+  final List<Grades> gradesList;
   final List grades;
   final String program;
+  final String idNum;
 
-  const KnnResult({super.key, required this.program, required this.grades});
+  const KnnResult(
+      {super.key,
+      required this.gradesList,
+      required this.program,
+      required this.grades,
+      required this.idNum});
 
   @override
   State<KnnResult> createState() => _KnnResultState();
 }
 
 class _KnnResultState extends State<KnnResult> {
-  final knnAlgo = KnnAlgorithm();
+  final knnAlgo = KnnHelper();
 
   @override
   void initState() {
     super.initState();
   }
 
+  Widget rateButton() {
+    return Container(
+      decoration: checkResBoxDecor(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+        child: Text(
+          'Rate the prediction',
+          style: customTextStyle(size: 20.0, fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Map<dynamic, int> countMap = {};
+    double rating = 3;
     final List<Color> colors = [
       Colors.red,
       Colors.orange,
@@ -56,7 +79,7 @@ class _KnnResultState extends State<KnnResult> {
           const BackgroundImage(),
           const Header(headerTitle: 'Your Results'),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10.0, 150, 10.0, 0),
+            padding: const EdgeInsets.fromLTRB(5.0, 100, 5.0, 0),
             child: FutureBuilder(
                 future: knnAlgo.getResults(widget.program, widget.grades),
                 builder: ((context, snapshot) {
@@ -103,9 +126,40 @@ class _KnnResultState extends State<KnnResult> {
                   return const SizedBox(
                       height: 50,
                       width: 50,
-                      child: CircularProgressIndicator());
+                      child: Center(child: CircularProgressIndicator()));
                 })),
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0, top: 10),
+              child: InkWell(
+                  onTap: () {
+                    //     showDialog(context: context, builder: (context) {
+                    //       return AnimatedRatingStars(
+                    //   initialRating: 2.5,
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       rating = value;
+                    //     });
+                    //   },
+                    //   displayRatingValue: true, // Display the rating value
+                    //   interactiveTooltips: true, // Allow toggling half-star state
+                    //   customFilledIcon: Icons.star,
+                    //   customHalfFilledIcon: Icons.star_half,
+                    //   customEmptyIcon: Icons.star_border,
+                    //   starSize: 40.0,
+                    //   animationDuration: const Duration(milliseconds: 500),
+                    //   animationCurve: Curves.easeInOut,
+                    // ),
+                    //     });
+
+                    saveGradeToOnline(
+                        widget.gradesList, widget.program, widget.idNum);
+                  },
+                  child: rateButton()),
+            ),
+          )
         ]));
   }
 }

@@ -43,6 +43,7 @@ dependencies:
   flutter_native_splash:
   animations: ^2.0.7
   page_transition:
+  cloud_firestore: ^4.9.0
 
 dev_dependencies:
   flutter_test:

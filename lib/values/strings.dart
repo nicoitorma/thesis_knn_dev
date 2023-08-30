@@ -14,6 +14,8 @@ String noProgram = 'No Program selected';
 String legends = 'Legends';
 String result = 'KNN Algorithm Results';
 String occurence = 'Occurence';
+String labelCollection = 'saved_grades';
+String labelIdNum = 'ID Number';
 
 final List<String> courseItem = [
   'BSCS',
