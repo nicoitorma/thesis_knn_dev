@@ -16,14 +16,16 @@ saveGradeToOnline(List<Grades> grades, String program, String? idNum,
     Map<String, dynamic> unitRatingMap = {
       'rating': rating,
       'units': unit,
-      'career': expectedCareer
     };
     dataMap[grades[i].courseCode!] = unitRatingMap;
   }
 
   try {
     /// This will add a new grades to the document [saved_grades]
-    await _db.collection(labelCollection).doc('$program ($idNum)').set(dataMap);
+    await _db
+        .collection(labelCollection)
+        .doc('$program ($idNum) - $expectedCareer')
+        .set(dataMap);
   } catch (err) {
     print(err);
   }

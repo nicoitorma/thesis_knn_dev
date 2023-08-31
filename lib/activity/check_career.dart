@@ -38,7 +38,7 @@ class _CheckCareerState extends State<CheckCareer> {
       body: Stack(
         children: [
           const BackgroundImage(),
-          const Header(headerTitle: 'Enter your grades'),
+          Header(headerTitle: labelEnterGrades),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Container(
@@ -53,16 +53,16 @@ class _CheckCareerState extends State<CheckCareer> {
                           padding: const EdgeInsets.all(5),
                           child: TextField(
                             controller: idNumController,
-                            onSubmitted: (value) {
+                            onChanged: (value) {
                               if (value.isNotEmpty) {
                                 idNum = value.toString();
                               }
                             },
                             style: customTextStyle(size: 20.0),
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'ID Number',
-                                hintStyle: TextStyle(
+                            decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                hintText: labelIdNum,
+                                hintStyle: const TextStyle(
                                     fontFamily: 'Poppins', fontSize: 18)),
                           )),
                     ),

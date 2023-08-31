@@ -16,7 +16,15 @@ String result = 'KNN Algorithm Results';
 String occurence = 'Occurence';
 String labelIdNum = 'ID Number';
 
+String labelEnterGrades = 'Enter your grades';
+String labelYourRes = 'Your Results';
 String labelCollection = 'saved_grades';
+String labelRateTitle = 'Rate the prediction';
+String labelRateDesc =
+    'This will be used to improve the algorithm in the future.';
+String labelOk = 'OK';
+String labelCancel = 'Cancel';
+String labelExpectedCareer = 'Expected Career';
 
 final List<String> courseItem = [
   'BSCS',

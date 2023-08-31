@@ -31,9 +31,10 @@ class KnnResult extends StatefulWidget {
 
 class _KnnResultState extends State<KnnResult> {
   final knnAlgo = KnnHelper();
-  double predRating = 3;
+  double predRating = 4;
   String? expectedCareer;
-  List sortedLabels = [];
+  List occurence = [];
+  Map<dynamic, int> countMap = {};
   final careerCtrl = TextEditingController();
 
   @override
@@ -53,7 +54,7 @@ class _KnnResultState extends State<KnnResult> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
         child: Text(
-          'Rate the prediction',
+          labelRateTitle,
           style: customTextStyle(size: 20.0, fontWeight: FontWeight.w700),
         ),
       ),
@@ -62,8 +63,6 @@ class _KnnResultState extends State<KnnResult> {
 
   @override
   Widget build(BuildContext context) {
-    Map<dynamic, int> countMap = {};
-
     final List<Color> colors = [
       Colors.red,
       Colors.orange,
@@ -75,7 +74,7 @@ class _KnnResultState extends State<KnnResult> {
       Colors.brown
     ];
 
-    sortLabel(list) {
+    countOccurence(list) {
       for (var label in list) {
         countMap[label] = (countMap[label] ?? 0) + 1;
       }
@@ -84,11 +83,25 @@ class _KnnResultState extends State<KnnResult> {
         ..sort((a, b) => countMap[b]!.compareTo(countMap[a]!));
     }
 
+    String highestValueKey(Map<dynamic, int> data) {
+      int maxValue = 0;
+      String keyWithMaxValue = '';
+
+      data.forEach((key, value) {
+        if (value > maxValue) {
+          maxValue = value;
+          keyWithMaxValue = key;
+        }
+      });
+
+      return keyWithMaxValue;
+    }
+
     return Scaffold(
         appBar: AppBar(toolbarHeight: 0.0),
         body: Stack(children: [
           const BackgroundImage(),
-          const Header(headerTitle: 'Your Results'),
+          Header(headerTitle: labelYourRes),
           Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 100, 8.0, 0),
             child: FutureBuilder(
@@ -97,11 +110,10 @@ class _KnnResultState extends State<KnnResult> {
                   if (snapshot.hasData &&
                       snapshot.connectionState == ConnectionState.done) {
                     var list = snapshot.data;
-                    sortedLabels = sortLabel(list);
-                    print(list);
-                    print(countMap);
+                    occurence = countOccurence(list);
                     return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Flexible(
                             child: Container(
@@ -118,21 +130,21 @@ class _KnnResultState extends State<KnnResult> {
                               textAlign: TextAlign.start,
                               style: customTextStyle()),
                         ),
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: sortedLabels.length,
-                            itemBuilder: (context, index) {
-                              String value = sortedLabels[index];
-                              Color color = colors[sortedLabels.indexOf(value)];
-
-                              return Container(
-                                decoration: tableBoxDecor(),
-                                child: Column(children: [
-                                  Results(
-                                      color: color, result: sortedLabels[index])
-                                ]),
-                              );
-                            }),
+                        Flexible(
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: occurence.length,
+                              itemBuilder: (context, index) {
+                                String value = countMap.keys.toList()[index];
+                                Color color = colors[index];
+                                return Container(
+                                  decoration: tableBoxDecor(),
+                                  child: Column(children: [
+                                    Results(color: color, result: value)
+                                  ]),
+                                );
+                              }),
+                        ),
                       ],
                     );
                   }
@@ -160,22 +172,25 @@ class _KnnResultState extends State<KnnResult> {
                                           widget.gradesList,
                                           widget.program,
                                           widget.idNum,
-                                          expectedCareer ?? sortedLabels[0]);
+                                          expectedCareer ??
+                                              highestValueKey(countMap));
                                     },
-                                    child: const Text('OK')),
+                                    child: Text(labelOk)),
                                 TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: const Text('Cancel')),
+                                    child: Text(labelCancel)),
                               ],
                               content:
                                   StatefulBuilder(builder: (context, setState) {
                                 return Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text('Rate the prediction',
-                                        style: customTextStyle(size: 16.0)),
+                                    Text(labelRateTitle,
+                                        style: customTextStyle(size: 18.0)),
+                                    Text(labelRateDesc,
+                                        style: customTextStyle(size: 14.0)),
                                     SmoothStarRating(
                                         rating: predRating,
                                         size: 30,
@@ -204,10 +219,11 @@ class _KnnResultState extends State<KnnResult> {
                                             }
                                           },
                                           style: customTextStyle(size: 20.0),
-                                          decoration: const InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              hintText: 'Expected Career',
-                                              hintStyle: TextStyle(
+                                          decoration: InputDecoration(
+                                              border:
+                                                  const OutlineInputBorder(),
+                                              hintText: labelExpectedCareer,
+                                              hintStyle: const TextStyle(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 18)),
                                         ),
