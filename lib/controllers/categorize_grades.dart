@@ -1,6 +1,6 @@
 import '../models/grades.dart';
 
-class CategorizeGrades {
+class CleanGrades {
   /// This function removes objects from a list if they have null values for certain properties.
   List<Grades> removeNullValues(List<Grades> gradesList) {
     gradesList.removeWhere((obj) =>
@@ -14,27 +14,11 @@ class CategorizeGrades {
 
   List categorizeSemesters(String program, List<Grades> grades) {
     List<Grades> gradesList = removeNullValues(grades);
-    List<double> sortedGrades = [];
-
-    // final courseMappings = (program == 'BSCS')
-    //     ? csCourseMappings
-    //     : (program == 'BSIS')
-    //         ? isCourseMappings
-    //         : itCourseMappings;
+    List<double> cleanedData = [];
 
     for (Grades grade in gradesList) {
-      // String courseCode = grade.courseCode!.toUpperCase();
-      // int categoryIndex = courseMappings.indexOf(courseCode);
-
-      // if (categoryIndex != -1) {
-      //   gradesInitial.insert(categoryIndex, grade.rating!);
-      // }
-
-      sortedGrades.add(grade.rating!);
+      cleanedData.add(grade.rating!);
     }
-    // sortedGrades.removeWhere((element) => element == 0);
-    // sortedGrades = [gradesInitial];
-    // sortedGrades = removeEmptyLists(sortedGrades);
-    return sortedGrades;
+    return cleanedData;
   }
 }

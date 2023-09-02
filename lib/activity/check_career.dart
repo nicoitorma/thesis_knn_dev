@@ -17,7 +17,7 @@ class CheckCareer extends StatefulWidget {
 }
 
 class _CheckCareerState extends State<CheckCareer> {
-  CategorizeGrades categorizeGrades = CategorizeGrades();
+  CleanGrades categorizeGrades = CleanGrades();
   String? selectedCourse;
   String idNum = '';
   final idNumController = TextEditingController();
