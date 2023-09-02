@@ -20,7 +20,7 @@ class KnnHelper {
         dataset = await rootBundle.loadString('assets/knn_model/CSDataset.csv');
         break;
       case 'BSIS':
-        dataset = await rootBundle.loadString('assets/knn_model/CSDataset.csv');
+        dataset = await rootBundle.loadString('assets/knn_model/ISDataset.csv');
         break;
     }
     List<List> trainData = await parseCsv(dataset);

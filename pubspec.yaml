@@ -57,6 +57,7 @@ flutter:
   assets:
     - assets/imgs/
     - assets/knn_model/CSDataset.csv
+    - assets/knn_model/ISDataset.csv
 
   fonts:
     - family: Poppins
