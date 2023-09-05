@@ -26,7 +26,6 @@ dependencies:
     sdk: flutter
 
   adobe_xd: ^2.0.1
-  webview_flutter: ^4.2.0
   path_provider: ^2.0.15
   csv:
   url_launcher:
@@ -37,6 +36,8 @@ dependencies:
   firebase_core: ^2.15.1
   cloud_firestore: ^4.9.0
   smooth_star_rating_null_safety: ^1.0.4+2
+  webview_flutter: ^4.2.4
+  webview_flutter_android: ^3.9.1
 
 dev_dependencies:
   flutter_test:

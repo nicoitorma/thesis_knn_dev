@@ -18,7 +18,8 @@ String labelIdNum = 'ID Number';
 
 String labelEnterGrades = 'Enter your grades';
 String labelYourRes = 'Your Results';
-String labelCollection = 'saved_grades';
+String labelCollection = 'database';
+String labelDoc = 'skills';
 String labelRateTitle = 'Rate the prediction';
 String labelRateDesc =
     'This will be used to improve the algorithm in the future.';

@@ -176,6 +176,7 @@ class _KnnResultState extends State<KnnResult> {
                                           widget.idNum,
                                           expectedCareer ??
                                               highestValueKey(countMap));
+                                      Navigator.pop(context);
                                     },
                                     child: Text(labelOk)),
                                 TextButton(

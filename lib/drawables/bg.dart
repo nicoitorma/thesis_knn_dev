@@ -13,7 +13,7 @@ class BackgroundImage extends StatelessWidget {
     //             end: Alignment.bottomLeft)));
 
     return Opacity(
-        opacity: 0.3,
+        opacity: 0.2,
         child: Image.asset('assets/imgs/bg.png',
             fit: BoxFit.cover,
             height: MediaQuery.sizeOf(context).height,
