@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:th_knn/activity/check_career.dart';
 import 'package:th_knn/activity/skills_recom.dart';
 import 'package:th_knn/drawables/bg.dart';
-import 'package:th_knn/layouts/box_decoration.dart';
-import 'package:th_knn/layouts/header.dart';
-import 'package:th_knn/layouts/text_style.dart';
+import 'package:th_knn/widgets/about.dart';
+import 'package:th_knn/widgets/box_decoration.dart';
+import 'package:th_knn/widgets/header.dart';
+import 'package:th_knn/widgets/text_style.dart';
 import 'package:th_knn/values/strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -119,7 +121,46 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: container(btn3),
               ),
             ]),
-          )
+          ),
+          Positioned(
+              bottom: 10,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  IconButton(
+                      onPressed: () async {
+                        if (kIsWeb) {
+                          String url =
+                              'https://nicoitorma.github.io/ocg-knn/ocg-about.html';
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            const CircularProgressIndicator();
+                            await launchUrl(Uri.parse(url),
+                                mode: LaunchMode.platformDefault);
+                          }
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => const AboutScreen()));
+                        }
+                      },
+                      icon: const Icon(Icons.info)),
+                  IconButton(
+                      onPressed: () async {
+                        if (kIsWeb) {
+                          String url =
+                              'https://nicoitorma.github.io/ocg-knn/ocg-help.html';
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            const CircularProgressIndicator();
+                            await launchUrl(Uri.parse(url),
+                                mode: LaunchMode.platformDefault);
+                          }
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => const AboutScreen()));
+                        }
+                      },
+                      icon: const Icon(Icons.help)),
+                ],
+              ))
         ]));
   }
 }

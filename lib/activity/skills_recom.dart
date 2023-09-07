@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/controllers/retrieve_career.dart';
 import 'package:th_knn/drawables/bg.dart';
-import 'package:th_knn/layouts/header.dart';
+import 'package:th_knn/widgets/header.dart';
 
 import '../models/skills.dart';
 

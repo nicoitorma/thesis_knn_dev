@@ -37,7 +37,8 @@ dependencies:
   cloud_firestore: ^4.9.0
   smooth_star_rating_null_safety: ^1.0.4+2
   webview_flutter: ^4.2.4
-  webview_flutter_android: ^3.9.1
+  webview_flutter_android: ^3.9.5
+  webview_flutter_wkwebview:
 
 dev_dependencies:
   flutter_test:
