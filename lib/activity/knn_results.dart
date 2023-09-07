@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 import 'package:th_knn/drawables/bg.dart';
-import 'package:th_knn/layouts/header.dart';
-import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/controllers/knn_helper.dart';
 import 'package:th_knn/values/strings.dart';
 
-import '../layouts/barchart.dart';
-import '../layouts/box_decoration.dart';
-import '../layouts/result.dart';
 import '../models/grades.dart';
 import '../controllers/rate_prediction.dart';
+import '../widgets/barchart.dart';
+import '../widgets/box_decoration.dart';
+import '../widgets/header.dart';
+import '../widgets/result.dart';
+import '../widgets/text_style.dart';
 
 class KnnResult extends StatefulWidget {
   final List<Grades> gradesList;

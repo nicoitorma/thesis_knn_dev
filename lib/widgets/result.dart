@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:th_knn/layouts/text_style.dart';
+import 'package:th_knn/widgets/text_style.dart';
 
 class Results extends StatelessWidget {
   final Color color;

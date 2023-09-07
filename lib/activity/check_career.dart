@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/drawables/bg.dart';
-import 'package:th_knn/layouts/box_decoration.dart';
-import 'package:th_knn/layouts/header.dart';
-import 'package:th_knn/layouts/text_style.dart';
 import 'package:th_knn/models/grades.dart';
 import 'package:th_knn/controllers/categorize_grades.dart';
-import '../layouts/grade_containers.dart';
 import '../values/strings.dart';
+import '../widgets/box_decoration.dart';
+import '../widgets/grade_containers.dart';
+import '../widgets/header.dart';
+import '../widgets/text_style.dart';
 import 'knn_results.dart';
 
 class CheckCareer extends StatefulWidget {

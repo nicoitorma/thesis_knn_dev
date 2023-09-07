@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/controllers/retrieve_career.dart';
 import 'package:th_knn/drawables/bg.dart';
-import 'package:th_knn/layouts/header.dart';
+import 'package:th_knn/values/strings.dart';
 
 import '../models/skills.dart';
+import '../widgets/header.dart';
 
 class SkillsRecom extends StatelessWidget {
   const SkillsRecom({super.key});
@@ -15,7 +16,7 @@ class SkillsRecom extends StatelessWidget {
         body: Stack(
           children: [
             const BackgroundImage(),
-            const Header(),
+            Header(headerTitle: btn3),
             Positioned.fill(
               top: 100,
               child: FutureBuilder(

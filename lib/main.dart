@@ -4,9 +4,9 @@ import 'package:page_transition/page_transition.dart';
 import 'package:th_knn/activity/check_career.dart';
 import 'package:th_knn/activity/skills_recom.dart';
 import 'package:th_knn/drawables/bg.dart';
-import 'package:th_knn/layouts/box_decoration.dart';
-import 'package:th_knn/layouts/header.dart';
-import 'package:th_knn/layouts/text_style.dart';
+import 'package:th_knn/widgets/box_decoration.dart';
+import 'package:th_knn/widgets/header.dart';
+import 'package:th_knn/widgets/text_style.dart';
 import 'package:th_knn/values/strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
