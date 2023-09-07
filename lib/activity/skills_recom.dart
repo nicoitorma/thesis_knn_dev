@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/controllers/retrieve_career.dart';
 import 'package:th_knn/drawables/bg.dart';
-import 'package:th_knn/values/strings.dart';
+import 'package:th_knn/widgets/header.dart';
 
 import '../models/skills.dart';
-import '../widgets/header.dart';
+import '../values/strings.dart';
 
 class SkillsRecom extends StatelessWidget {
   const SkillsRecom({super.key});
