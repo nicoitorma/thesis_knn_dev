@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.group1.thesis"
-    android:versionCode="1"
+    android:versionCode="2"
     android:versionName="1.0.0" >
 
     <uses-sdk
@@ -31,7 +31,7 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="CICT KNN Career Guidance" >
+        android:label="CICT Career Guidance" >
         <activity
             android:name="com.group1.thesis.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

@@ -8,6 +8,7 @@ import 'package:th_knn/drawables/bg.dart';
 import 'package:th_knn/widgets/about.dart';
 import 'package:th_knn/widgets/box_decoration.dart';
 import 'package:th_knn/widgets/header.dart';
+import 'package:th_knn/widgets/help.dart';
 import 'package:th_knn/widgets/text_style.dart';
 import 'package:th_knn/values/strings.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CICT KNN Career Guidance',
+      title: 'CICT Career Guidance',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xb2ffffff)),
         useMaterial3: true,
@@ -78,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               InkWell(
                 borderRadius: BorderRadius.circular(20.0),
                 onTap: () async {
-                  String url = 'https://cictdev.github.io/cict-cog';
+                  String url = 'https://th-grp.github.io/cict-cog';
                   if (await canLaunchUrl(Uri.parse(url))) {
                     const CircularProgressIndicator();
                     await launchUrl(Uri.parse(url),
@@ -126,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               bottom: 10,
               child: Row(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   IconButton(
                       onPressed: () async {
@@ -155,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           }
                         } else {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => const AboutScreen()));
+                              builder: (_) => const HelpScreen()));
                         }
                       },
                       icon: const Icon(Icons.help)),

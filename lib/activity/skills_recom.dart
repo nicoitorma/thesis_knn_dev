@@ -16,7 +16,7 @@ class SkillsRecom extends StatelessWidget {
         body: Stack(
           children: [
             const BackgroundImage(),
-            Header(headerTitle: btn3),
+            Header(headerTitle: labelSkill),
             Positioned.fill(
               top: 100,
               child: FutureBuilder(
@@ -25,7 +25,6 @@ class SkillsRecom extends StatelessWidget {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    print(snapshot.data);
                     List<Skill> data = snapshot.data as List<Skill>;
                     return ListView.builder(
                         shrinkWrap: true,

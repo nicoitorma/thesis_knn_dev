@@ -1,7 +1,7 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.group1.thesis"
-4    android:versionCode="1"
+4    android:versionCode="2"
 5    android:versionName="1.0.0" >
 6
 7    <uses-sdk
@@ -44,7 +44,7 @@
 31-->[androidx.core:core:1.6.0] C:\Users\Nico\.gradle\caches\transforms-3\7e9df2ac2213a6bd3cef0f2f27870d79\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 32        android:debuggable="true"
 33        android:icon="@mipmap/ic_launcher"
-34        android:label="CICT KNN Career Guidance" >
+34        android:label="CICT Career Guidance" >
 35        <activity
 36            android:name="com.group1.thesis.MainActivity"
 37            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

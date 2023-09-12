@@ -162,7 +162,7 @@ class _CheckCareerState extends State<CheckCareer> {
               padding: const EdgeInsets.only(bottom: 8.0),
               child: InkWell(
                 onTap: () {
-                  if ((gradesList.length > 10) &&
+                  if ((gradesList.length > 1) &&
                       (selectedCourse != null) &&
                       (idNum != '')) {
                     List result = categorizeGrades.categorizeSemesters(
