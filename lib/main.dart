@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               InkWell(
                 borderRadius: BorderRadius.circular(20.0),
                 onTap: () async {
-                  String url = 'https://th-grp.github.io/cict-cog';
+                  String url = 'https://group-1dev.github.io/cict-cog';
                   if (await canLaunchUrl(Uri.parse(url))) {
                     const CircularProgressIndicator();
                     await launchUrl(Uri.parse(url),
