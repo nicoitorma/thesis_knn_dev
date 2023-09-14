@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:csv/csv.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 import 'knn.dart';
 
@@ -10,13 +9,12 @@ class KnnHelper {
   //   List<List<dynamic>> csvTable = const CsvToListConverter().convert(csvData);
   //   return csvTable.map((row) => row.map((cell) => cell).toList()).toList();
   // }
-  final storageRef = FirebaseStorage.instance;
-  Future getCSV(String program) async {
+  Future getCSV(String url) async {
     List<List<dynamic>> csvData = [];
 
     try {
-      final path = storageRef.ref('dataset/$program');
-      final url = await path.getDownloadURL();
+      // final path = storageRef.ref('dataset/$program');
+      // final url = await path.getDownloadURL();
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
@@ -39,13 +37,16 @@ class KnnHelper {
     dynamic result;
     switch (program) {
       case 'BSCS':
-        data = 'CSDataset.csv';
+        data =
+            'https://firebasestorage.googleapis.com/v0/b/ocg-knn.appspot.com/o/dataset%2FCSDataset.csv?alt=media&token=b0ffecdb-f103-4bec-b3f5-9fd2732bdac2';
         break;
       case 'BSIT':
-        data = 'ITDataset.csv';
+        data =
+            'https://firebasestorage.googleapis.com/v0/b/ocg-knn.appspot.com/o/dataset%2FITDataset.csv?alt=media&token=fc028f8f-4758-4d84-a81c-ad9e3f812bc4';
         break;
       case 'BSIS':
-        data = 'ISDataset.csv';
+        data =
+            'https://firebasestorage.googleapis.com/v0/b/ocg-knn.appspot.com/o/dataset%2FISDataset.csv?alt=media&token=bed8342c-88d2-40cf-bf2f-1e8423d15';
         break;
     }
     try {

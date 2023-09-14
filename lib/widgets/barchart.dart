@@ -17,7 +17,7 @@ class _BarChartWidget extends StatelessWidget {
         borderData: borderData,
         titlesData: titlesData,
         barGroups: barGroups,
-        gridData: FlGridData(show: false),
+        gridData: const FlGridData(show: false),
         alignment: BarChartAlignment.spaceAround,
         maxY: data.length.toDouble(),
       ),
@@ -56,10 +56,10 @@ class _BarChartWidget extends StatelessWidget {
         axisNameSize: 20,
         axisNameWidget: Text(occurence,
             textAlign: TextAlign.center, style: customTextStyle()),
-        sideTitles: SideTitles(showTitles: true, reservedSize: 30),
+        sideTitles: const SideTitles(showTitles: true, reservedSize: 30),
       ),
-      rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-      topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)));
+      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)));
 
   FlBorderData get borderData => FlBorderData(
         border: const Border(left: BorderSide(), bottom: BorderSide()),
