@@ -10,12 +10,13 @@ class KnnHelper {
   //   List<List<dynamic>> csvTable = const CsvToListConverter().convert(csvData);
   //   return csvTable.map((row) => row.map((cell) => cell).toList()).toList();
   // }
-
+  final storageRef = FirebaseStorage.instance;
   Future getCSV(String program) async {
     List<List<dynamic>> csvData = [];
+
     try {
-      final ref = FirebaseStorage.instance.ref('dataset/$program');
-      final url = await ref.getDownloadURL();
+      final path = storageRef.ref('dataset/$program');
+      final url = await path.getDownloadURL();
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
@@ -47,9 +48,12 @@ class KnnHelper {
         data = 'ISDataset.csv';
         break;
     }
-
-    List<List> csv = await getCSV(data);
-    result = KNN(data: csv).classify(gradesList, 10);
+    try {
+      List<List> csv = await getCSV(data);
+      result = KNN(data: csv).classify(gradesList, 10);
+    } catch (e) {
+      print('Error: $e');
+    }
 
     return result;
   }

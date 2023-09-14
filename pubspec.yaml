@@ -25,21 +25,21 @@ dependencies:
   flutter:
     sdk: flutter
 
-  adobe_xd: ^2.0.1
-  path_provider: ^2.0.15
+  adobe_xd:
+  path_provider:
   csv:
   url_launcher:
-  fl_chart: ^0.62.0
+  fl_chart:
   flutter_native_splash:
-  animations: ^2.0.7
+  animations:
   page_transition:
-  firebase_core: ^2.15.1
-  cloud_firestore: ^4.9.0
-  smooth_star_rating_null_safety: ^1.0.4+2
-  webview_flutter: ^4.2.4
-  webview_flutter_android: ^3.9.5
+  firebase_core:
+  cloud_firestore:
+  smooth_star_rating_null_safety:
+  webview_flutter:
+  webview_flutter_android:
   webview_flutter_wkwebview:
-  firebase_storage:
+  firebase_storage: ^11.2.6
 
 dev_dependencies:
   flutter_test:
