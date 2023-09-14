@@ -16,10 +16,7 @@ class KnnHelper {
     try {
       final ref = FirebaseStorage.instance.ref('dataset/$program');
       final url = await ref.getDownloadURL();
-      final response = await http.get(Uri.parse(url), headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET'
-      });
+      final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
         final String content = utf8.decode(response.bodyBytes);
@@ -32,7 +29,6 @@ class KnnHelper {
         }
       }
     } catch (e) {
-      print(e.runtimeType);
       print('Error retrieving CSV: $e');
     }
   }
