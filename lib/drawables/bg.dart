@@ -5,18 +5,19 @@ class BackgroundImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //     decoration: BoxDecoration(
-    //         gradient: LinearGradient(
-    //             colors: [const Color.fromARGB(50, 58, 183, 241), darkBlue],
-    //             begin: Alignment.topRight,
-    //             end: Alignment.bottomLeft)));
+    return Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+      Color.fromARGB(250, 0, 173, 239),
+      Color.fromARGB(250, 19, 22, 121),
+    ], begin: Alignment.topRight, end: Alignment.bottomLeft)));
 
-    return Opacity(
-        opacity: 0.2,
-        child: Image.asset('assets/imgs/bg.png',
-            fit: BoxFit.cover,
-            height: MediaQuery.sizeOf(context).height,
-            width: MediaQuery.sizeOf(context).width));
+    //   return Opacity(
+    //       opacity: 0.2,
+    //       child: Image.asset('assets/imgs/bg.png',
+    //           fit: BoxFit.cover,
+    //           height: MediaQuery.sizeOf(context).height,
+    //           width: MediaQuery.sizeOf(context).width));
+    // }
   }
 }

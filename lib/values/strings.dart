@@ -26,7 +26,7 @@ String labelRateDesc =
 String labelOk = 'OK';
 String labelCancel = 'Cancel';
 String labelExpectedCareer = 'Expected Career';
-String labelSkill = 'Skills and Certifications';
+String labelSkill = 'Skills & Certifications';
 
 String labelAbout = 'About';
 String labelHelp = 'Help';

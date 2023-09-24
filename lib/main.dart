@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xb2ffffff)),
         useMaterial3: true,
+        textTheme:
+            const TextTheme(headlineLarge: TextStyle(color: Colors.white)),
       ),
       home: const MyHomePage(),
     );
@@ -145,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (_) => const AboutScreen()));
                         }
                       },
-                      icon: const Icon(Icons.info)),
+                      icon: const Icon(Icons.info, color: Colors.white)),
                   IconButton(
                       onPressed: () async {
                         if (kIsWeb) {
@@ -161,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (_) => const HelpScreen()));
                         }
                       },
-                      icon: const Icon(Icons.help)),
+                      icon: const Icon(Icons.help, color: Colors.white)),
                 ],
               ))
         ]));

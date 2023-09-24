@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/values/colors.dart';
 import 'package:th_knn/values/strings.dart';
+import 'package:th_knn/widgets/text_style.dart';
 
 class Header extends StatelessWidget {
   final String? headerTitle;
@@ -20,15 +21,7 @@ class Header extends StatelessWidget {
         ),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            headerTitle ?? goodDay,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 30,
-              color: Color(0xff000000),
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          child: Text(headerTitle ?? goodDay, style: headerTextStyle()),
         ));
   }
 }

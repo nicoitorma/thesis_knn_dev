@@ -111,42 +111,91 @@ class _KnnResultState extends State<KnnResult> {
                       snapshot.connectionState == ConnectionState.done) {
                     var list = snapshot.data;
                     occurence = countOccurence(list);
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Flexible(
-                            child: Container(
-                                decoration: tableBoxDecor(),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0.0, 20, 0, 0),
-                                  child: BarChartWidget(
-                                      data: countMap, colors: colors),
-                                ))),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          child: Text(legends,
-                              textAlign: TextAlign.start,
-                              style: customTextStyle()),
-                        ),
-                        Flexible(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: occurence.length,
-                              itemBuilder: (context, index) {
-                                String value = countMap.keys.toList()[index];
-                                Color color = colors[index];
-                                return Container(
-                                  decoration: tableBoxDecor(),
-                                  child: Column(children: [
-                                    Results(color: color, result: value)
-                                  ]),
-                                );
-                              }),
-                        ),
-                      ],
-                    );
+
+                    return (MediaQuery.sizeOf(context).width > 600)
+                        ? Row(
+                            children: [
+                              Flexible(
+                                  child: Container(
+                                      decoration: tableBoxDecor(),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0.0, 20, 0, 0),
+                                        child: BarChartWidget(
+                                            data: countMap, colors: colors),
+                                      ))),
+                              const SizedBox(width: 5),
+                              Flexible(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 10, 0, 0),
+                                      child: Text(legends,
+                                          textAlign: TextAlign.start,
+                                          style: customTextStyle()),
+                                    ),
+                                    AspectRatio(
+                                      aspectRatio: 1.5,
+                                      child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: occurence.length,
+                                          itemBuilder: (context, index) {
+                                            String value =
+                                                countMap.keys.toList()[index];
+                                            Color color = colors[index];
+                                            return Container(
+                                              decoration: tableBoxDecor(),
+                                              child: Column(children: [
+                                                Results(
+                                                    color: color, result: value)
+                                              ]),
+                                            );
+                                          }),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Flexible(
+                                  child: Container(
+                                      decoration: tableBoxDecor(),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0.0, 20, 0, 0),
+                                        child: BarChartWidget(
+                                            data: countMap, colors: colors),
+                                      ))),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                child: Text(legends,
+                                    textAlign: TextAlign.start,
+                                    style: customTextStyle()),
+                              ),
+                              Flexible(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: occurence.length,
+                                    itemBuilder: (context, index) {
+                                      String value =
+                                          countMap.keys.toList()[index];
+                                      Color color = colors[index];
+                                      return Container(
+                                        decoration: tableBoxDecor(),
+                                        child: Column(children: [
+                                          Results(color: color, result: value)
+                                        ]),
+                                      );
+                                    }),
+                              ),
+                            ],
+                          );
                   }
                   return const Center(
                     child: SizedBox(

@@ -19,7 +19,7 @@ class _BarChartWidget extends StatelessWidget {
         barGroups: barGroups,
         gridData: const FlGridData(show: false),
         alignment: BarChartAlignment.spaceAround,
-        maxY: data.length.toDouble(),
+        maxY: 7,
       ),
     );
   }
@@ -94,7 +94,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.6,
+      aspectRatio: 1.5,
       child: _BarChartWidget(widget.data, widget.colors),
     );
   }
