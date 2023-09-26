@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
-import 'package:th_knn/drawables/bg.dart';
+import 'package:th_knn/backgrounds/bg.dart';
 import 'package:th_knn/widgets/header.dart';
 import 'package:th_knn/widgets/text_style.dart';
 import 'package:th_knn/controllers/knn_helper.dart';

@@ -8,10 +8,12 @@ class BackgroundImage extends StatelessWidget {
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
-      Color.fromARGB(250, 0, 173, 239),
-      Color.fromARGB(250, 19, 22, 121),
-    ], begin: Alignment.topRight, end: Alignment.bottomLeft)));
+      Color.fromARGB(255, 0, 168, 204),
+      Color.fromARGB(255, 39, 73, 109),
+    ], begin: Alignment.centerRight, end: Alignment.centerLeft)));
 
+    // return Center(child: Image.asset('assets/imgs/knn.gif'));
+    // return Container(color: Colors.white);
     //   return Opacity(
     //       opacity: 0.2,
     //       child: Image.asset('assets/imgs/bg.png',

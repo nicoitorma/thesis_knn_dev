@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:th_knn/drawables/bg.dart';
+import 'package:th_knn/backgrounds/bg.dart';
 import 'package:th_knn/widgets/box_decoration.dart';
 import 'package:th_knn/widgets/header.dart';
 import 'package:th_knn/widgets/text_style.dart';
@@ -162,7 +162,7 @@ class _CheckCareerState extends State<CheckCareer> {
               padding: const EdgeInsets.only(bottom: 8.0),
               child: InkWell(
                 onTap: () {
-                  if ((gradesList.length > 1) &&
+                  if ((gradesList.length > 10) &&
                       (selectedCourse != null) &&
                       (idNum != '')) {
                     List result = categorizeGrades.categorizeSemesters(

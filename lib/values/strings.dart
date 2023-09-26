@@ -1,3 +1,4 @@
+String appName = 'CICT Career Guidance';
 String goodDay = 'Good Day, User!';
 String btn1 = 'Request for\nCertificate of Grades';
 String btn2 = 'Check my \nCareer Path';

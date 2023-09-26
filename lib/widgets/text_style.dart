@@ -9,7 +9,7 @@ customTextStyle({var size, var fontWeight, var color}) => TextStyle(
 headerTextStyle() => const TextStyle(
     fontFamily: 'Poppins',
     fontSize: 26,
-    color: Colors.white,
+    color: Colors.black,
     fontWeight: FontWeight.w600);
 
 skillsTextStyle() => const TextStyle(

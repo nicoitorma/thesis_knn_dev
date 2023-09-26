@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/controllers/retrieve_career.dart';
-import 'package:th_knn/drawables/bg.dart';
+import 'package:th_knn/backgrounds/bg.dart';
 import 'package:th_knn/values/colors.dart';
 import 'package:th_knn/widgets/header.dart';
 import 'package:th_knn/widgets/text_style.dart';
