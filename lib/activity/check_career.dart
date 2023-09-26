@@ -9,6 +9,7 @@ import '../widgets/grade_containers.dart';
 import '../values/strings.dart';
 import 'knn_results.dart';
 
+// Code for the Check Career Path button in the main screen
 class CheckCareer extends StatefulWidget {
   const CheckCareer({super.key});
 
@@ -26,7 +27,6 @@ class _CheckCareerState extends State<CheckCareer> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     idNumController.dispose();
     super.dispose();
   }

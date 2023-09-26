@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/widgets/text_style.dart';
 
+// Custom implementation of the [ Legends ] part in the results
+// of KNN algo
+
 class Results extends StatelessWidget {
   final Color color;
   final String result;

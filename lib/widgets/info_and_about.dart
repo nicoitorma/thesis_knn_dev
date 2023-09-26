@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'about.dart';
 import 'help.dart';
 
+// The info and about button in the bottom left of the main screen
+
 class InfoAbout extends StatelessWidget {
   const InfoAbout({super.key});
 

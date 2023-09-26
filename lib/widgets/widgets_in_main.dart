@@ -8,6 +8,7 @@ import '../values/const.dart';
 import '../values/strings.dart';
 import 'main_container.dart';
 
+// These are the 3 buttons in the main screen [Request COG, Check Career, Skills]
 mainContent() => StatefulBuilder(builder: ((context, setState) {
       return Container(
         margin: const EdgeInsets.only(top: 30),
