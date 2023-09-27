@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:th_knn/activity/knn_results.dart';
-import 'package:th_knn/models/grades.dart';
 import 'package:th_knn/values/strings.dart';
 import 'package:th_knn/widgets/text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -73,36 +71,6 @@ drawer({var scaffoldKey}) => StatefulBuilder(builder: ((context, setState) {
                 Navigator.of(context).push(PageTransition(
                     type: PageTransitionType.rightToLeftJoined,
                     child: const SkillsRecom(),
-                    duration: duration,
-                    reverseDuration: duration,
-                    childCurrent: drawer()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.account_tree),
-              title: Text('KNN',
-                  style: customTextStyle(size: 16.0, color: Colors.black)),
-              onTap: () {
-                List<Grades> mockGrades = [
-                  Grades(courseCode: 'cc202', units: 3, rating: 1.1),
-                  Grades(courseCode: 'cc302', units: 3, rating: 1.6),
-                  Grades(courseCode: 'cc303', units: 3, rating: 1.4),
-                ];
-                List mockGrades1 = [
-                  1.1,
-                  1.6,
-                  1.4,
-                ];
-                if (!kIsWeb && scaffoldKey.currentState.isDrawerOpen) {
-                  scaffoldKey.currentState?.closeDrawer();
-                }
-                Navigator.of(context).push(PageTransition(
-                    type: PageTransitionType.rightToLeftJoined,
-                    child: KnnResult(
-                        gradesList: mockGrades,
-                        program: 'BSIS',
-                        grades: mockGrades1,
-                        idNum: '2019-11111'),
                     duration: duration,
                     reverseDuration: duration,
                     childCurrent: drawer()));
