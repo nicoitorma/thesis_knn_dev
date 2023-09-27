@@ -4,5 +4,6 @@ import 'package:th_knn/widgets/text_style.dart';
 
 appBar(String title) => AppBar(
     backgroundColor: Colors.white,
+    iconTheme: const IconThemeData(color: Colors.black),
     centerTitle: (kIsWeb) ? true : false,
     title: Text(title, style: headerTextStyle()));
