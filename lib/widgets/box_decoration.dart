@@ -9,7 +9,7 @@ customBoxDecor({var borderRadius}) => BoxDecoration(
 // The decoration and width of the textbox in the Check Career Path
 tableBoxDecor() => BoxDecoration(
     color: customBoxColorOrig,
-    border: Border.all(width: 2.0, color: boxBorderColor));
+    border: Border.all(width: 1.0, color: boxBorderColor));
 
 // Decoration of the [ Result ] Button in the Check career Path
 checkResBoxDecor() => BoxDecoration(

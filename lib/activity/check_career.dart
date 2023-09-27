@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:th_knn/backgrounds/bg.dart';
+import 'package:th_knn/values/colors.dart';
+import 'package:th_knn/widgets/appbar.dart';
 import 'package:th_knn/widgets/box_decoration.dart';
-import 'package:th_knn/widgets/header.dart';
 import 'package:th_knn/widgets/text_style.dart';
 import 'package:th_knn/models/grades.dart';
 import 'package:th_knn/controllers/categorize_grades.dart';
@@ -34,16 +34,13 @@ class _CheckCareerState extends State<CheckCareer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(toolbarHeight: 0.0),
+      appBar: appBar(btn2),
       body: Stack(
         children: [
-          const BackgroundImage(),
-          Header(headerTitle: labelEnterGrades),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Container(
               decoration: tableBoxDecor(),
-              margin: const EdgeInsets.only(top: 100),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.max,
@@ -62,8 +59,7 @@ class _CheckCareerState extends State<CheckCareer> {
                             decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
                                 hintText: labelIdNum,
-                                hintStyle: const TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 18)),
+                                hintStyle: customTextStyle(size: 18.0)),
                           )),
                     ),
                     Flexible(
@@ -88,69 +84,64 @@ class _CheckCareerState extends State<CheckCareer> {
             ),
           ),
           Positioned.fill(
-            top: 190,
+            top: 100,
             bottom: 80,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
-              child: SingleChildScrollView(
-                child: IgnorePointer(
-                  ignoring: (idNum == '') && (selectedCourse == null),
-                  child: Opacity(
-                    opacity:
-                        (idNum == '') && (selectedCourse == null) ? 0.5 : 1.0,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Table(
-                              defaultColumnWidth: const FlexColumnWidth(),
-                              children: [
-                                TableRow(children: [
+              child: IgnorePointer(
+                ignoring: idNum.isEmpty && selectedCourse == null,
+                child: Opacity(
+                  opacity: idNum.isEmpty && selectedCourse == null ? 0.5 : 1.0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Table(
+                            border:
+                                TableBorder.all(color: Colors.black, width: 2),
+                            defaultColumnWidth: const FlexColumnWidth(),
+                            children: [
+                              TableRow(
+                                children: [
                                   gradeContainer(courseCode),
                                   gradeContainer(units),
                                   gradeContainer(rating),
-                                ]),
-                                ...gradesList.map((data) {
-                                  return TableRow(children: [
+                                ],
+                              ),
+                              for (var data in gradesList)
+                                TableRow(
+                                  children: [
                                     buildTextFieldContainer(
-                                      onChanged: (value) {
-                                        data.courseCode = value.toUpperCase();
-                                      },
+                                      onChanged: (value) =>
+                                          data.courseCode = value.toUpperCase(),
                                     ),
                                     buildTextFieldContainer(
                                       keyboardType: TextInputType.number,
-                                      onChanged: (value) {
-                                        data.units = int.tryParse(value);
-                                      },
+                                      onChanged: (value) =>
+                                          data.units = int.tryParse(value),
                                     ),
                                     buildTextFieldContainer(
                                       keyboardType: TextInputType.number,
-                                      onChanged: (value) {
-                                        data.rating = double.tryParse(value);
-                                      },
+                                      onChanged: (value) =>
+                                          data.rating = double.tryParse(value),
                                     ),
-                                  ]);
-                                }),
-                              ],
-                            ),
+                                  ],
+                                ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 30),
-                        FloatingActionButton(
-                          shape: const CircleBorder(),
-                          backgroundColor: Colors.grey,
-                          onPressed: () {
-                            setState(() {
-                              gradesList.add(Grades());
-                            });
-                          },
-                          child: const Icon(Icons.add),
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 30),
+                      FloatingActionButton(
+                        shape: const CircleBorder(),
+                        backgroundColor: fabColor,
+                        onPressed: () =>
+                            setState(() => gradesList.add(Grades())),
+                        child: const Icon(Icons.add, color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -72,7 +72,7 @@ class _BarChartWidget extends StatelessWidget {
           barRods: [
             BarChartRodData(
               toY: entry.value.toDouble(),
-              width: 40,
+              width: 30,
               borderRadius: BorderRadius.zero,
               color: colors[data.keys.toList().indexOf(entry.key)],
             ),

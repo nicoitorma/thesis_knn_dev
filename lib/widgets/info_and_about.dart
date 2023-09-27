@@ -33,7 +33,7 @@ class InfoAbout extends StatelessWidget {
                         MaterialPageRoute(builder: (_) => const AboutScreen()));
                   }
                 },
-                icon: const Icon(Icons.info, color: Colors.white)),
+                icon: const Icon(Icons.info)),
             IconButton(
                 onPressed: () async {
                   if (kIsWeb) {
@@ -49,7 +49,7 @@ class InfoAbout extends StatelessWidget {
                         MaterialPageRoute(builder: (_) => const HelpScreen()));
                   }
                 },
-                icon: const Icon(Icons.help, color: Colors.white)),
+                icon: const Icon(Icons.help)),
           ],
         ));
   }

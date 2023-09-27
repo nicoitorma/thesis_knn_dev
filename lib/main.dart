@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xb2ffffff)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
         textTheme:
             const TextTheme(headlineLarge: TextStyle(color: Colors.white)),
@@ -46,8 +46,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    //Check if screen size is > 650
-    if (MediaQuery.of(context).size.width > 650) {
+    //Check if screen size is > 1100
+    if (MediaQuery.of(context).size.width > 1100) {
       return const WebScreen();
     }
     return const PhoneScreen();

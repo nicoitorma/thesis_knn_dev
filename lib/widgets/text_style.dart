@@ -14,9 +14,5 @@ headerTextStyle() => const TextStyle(
 
 skillsTextStyle() => const TextStyle(
       fontSize: 16,
-      color: Colors.white,
-      height: 1.55,
+      color: Colors.black,
     );
-
-bulletTextStyle() =>
-    const TextStyle(fontSize: 16, height: 1.55, color: Colors.white);
