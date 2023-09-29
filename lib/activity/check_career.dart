@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:th_knn/values/colors.dart';
 import 'package:th_knn/widgets/appbar.dart';
 import 'package:th_knn/widgets/box_decoration.dart';
+import 'package:th_knn/widgets/overview.dart';
 import 'package:th_knn/widgets/text_style.dart';
 import 'package:th_knn/models/grades.dart';
 import 'package:th_knn/controllers/categorize_grades.dart';
@@ -39,56 +40,56 @@ class _CheckCareerState extends State<CheckCareer> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20),
             child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Card(
-                  elevation: 5,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Flexible(
-                          child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: TextField(
-                                controller: idNumController,
-                                onChanged: (value) {
-                                  if (value.isNotEmpty) {
-                                    idNum = value.toString();
-                                  }
-                                },
-                                style: customTextStyle(size: 20.0),
-                                decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    hintText: labelIdNum,
-                                    hintStyle: customTextStyle(size: 18.0)),
-                              )),
+              headingCard(labelInstruction, labelInstruction1),
+              const SizedBox(height: 10),
+              Card(
+                elevation: 5,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Flexible(
+                        child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: TextField(
+                              controller: idNumController,
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  idNum = value.toString();
+                                }
+                              },
+                              style: customTextStyle(size: 20.0),
+                              decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  hintText: labelIdNum,
+                                  hintStyle: customTextStyle(size: 18.0)),
+                            )),
+                      ),
+                      Flexible(
+                        child: DropdownButton<String>(
+                          style: customTextStyle(size: 20.0),
+                          hint: Text(program),
+                          value: selectedCourse,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedCourse = value!;
+                            });
+                          },
+                          items: courseItem.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         ),
-                        Flexible(
-                          child: DropdownButton<String>(
-                            style: customTextStyle(size: 20.0),
-                            hint: Text(program),
-                            value: selectedCourse,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedCourse = value!;
-                              });
-                            },
-                            items: courseItem.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ]),
-                ),
+                      ),
+                    ]),
               ),
+              const SizedBox(height: 10),
               Card(
                 elevation: 5,
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: IgnorePointer(
                     ignoring: idNum.isEmpty && selectedCourse == null,
                     child: Opacity(
@@ -135,14 +136,6 @@ class _CheckCareerState extends State<CheckCareer> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 30),
-                          FloatingActionButton(
-                            shape: const CircleBorder(),
-                            backgroundColor: fabColor,
-                            onPressed: () =>
-                                setState(() => gradesList.add(Grades())),
-                            child: const Icon(Icons.add, color: Colors.white),
-                          ),
                         ],
                       ),
                     ),
@@ -153,38 +146,53 @@ class _CheckCareerState extends State<CheckCareer> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: InkWell(
-                onTap: () {
-                  if ((gradesList.length > 10) &&
-                      (selectedCourse != null) &&
-                      (idNum != '')) {
-                    List result = categorizeGrades.categorizeSemesters(
-                        selectedCourse!, gradesList);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (builder) => KnnResult(
-                          gradesList: gradesList,
-                          program: selectedCourse!,
-                          grades: result,
-                          idNum: idNum,
-                        ),
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          insufficientData,
-                          style:
-                              customTextStyle(size: 20.0, color: Colors.white),
-                        ),
-                      ),
-                    );
-                  }
-                },
-                child: checkResultsButtton(),
+            child: Card(
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FloatingActionButton(
+                      tooltip: labelFabTooltip,
+                      shape: const CircleBorder(),
+                      backgroundColor: fabColor,
+                      onPressed: () => setState(() => gradesList.add(Grades())),
+                      child: const Icon(Icons.add, color: Colors.white),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        if ((gradesList.length > 10) &&
+                            (selectedCourse != null) &&
+                            (idNum != '')) {
+                          List result = categorizeGrades.categorizeSemesters(
+                              selectedCourse!, gradesList);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (builder) => KnnResult(
+                                gradesList: gradesList,
+                                program: selectedCourse!,
+                                grades: result,
+                                idNum: idNum,
+                              ),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                insufficientData,
+                                style: customTextStyle(
+                                    size: 20.0, color: Colors.white),
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      child: checkResultsButtton(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

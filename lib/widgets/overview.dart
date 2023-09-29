@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/widgets/text_style.dart';
 
-import '../values/strings.dart';
-
-overview() => Card(
+headingCard(String text1, String text2) => Card(
       elevation: 5,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -13,13 +11,15 @@ overview() => Card(
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                labelOverview,
+                text1,
                 textAlign: TextAlign.start,
                 style: customTextStyle(size: 18.0, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 5),
-            Text(labelOverview1, style: customTextStyle(size: 16.0)),
+            Align(
+                alignment: Alignment.topLeft,
+                child: Text(text2, style: customTextStyle(size: 16.0))),
           ],
         ),
       ),

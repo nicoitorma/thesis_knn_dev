@@ -23,10 +23,10 @@ class _PhoneScreenState extends State<PhoneScreen> {
       drawer: drawer(scaffoldKey: scaffoldKey),
       body: Stack(children: [
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(20.0),
           child: ListView(
             children: [
-              overview(),
+              headingCard(labelOverview, labelOverview1),
               const SizedBox(height: 20),
               Card(
                 elevation: 5,

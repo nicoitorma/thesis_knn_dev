@@ -11,6 +11,7 @@ gradeContainer(String title) => Container(
     child: Center(
       child: Text(
         title,
-        style: customTextStyle(),
+        textAlign: TextAlign.center,
+        style: customTextStyle(fontWeight: FontWeight.bold),
       ),
     ));

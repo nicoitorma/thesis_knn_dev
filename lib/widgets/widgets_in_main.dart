@@ -10,7 +10,7 @@ mainContent() => Padding(
     child: Container(
       alignment: Alignment.topLeft,
       child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        overview(),
+        headingCard(labelOverview, labelOverview1),
         const SizedBox(height: 30),
         Row(
           children: [
