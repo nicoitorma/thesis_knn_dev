@@ -24,7 +24,7 @@ String labelFabTooltip = 'Add additional fields';
 String labelInstruction = 'Instructions:';
 String labelInstruction1 =
     '1. Please enter your major subjects only. \n2. Form will be disabled if ID number and Program are empty. \n3. Click the add button below to add fields if needed.';
-
+String errorNoIdProgram = 'Please enter ID number and Program first';
 String labelEnterGrades = 'Enter your grades';
 String labelYourRes = 'Your Results';
 String labelCollection = 'database';
