@@ -34,118 +34,122 @@ class _CheckCareerState extends State<CheckCareer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(btn2),
-      body: Stack(
-        children: [
+        appBar: appBar(btn2),
+        body: Stack(children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            child: Container(
-              decoration: tableBoxDecor(),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Flexible(
-                      child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: TextField(
-                            controller: idNumController,
-                            onChanged: (value) {
-                              if (value.isNotEmpty) {
-                                idNum = value.toString();
-                              }
-                            },
+            padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20),
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Card(
+                  elevation: 5,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Flexible(
+                          child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: TextField(
+                                controller: idNumController,
+                                onChanged: (value) {
+                                  if (value.isNotEmpty) {
+                                    idNum = value.toString();
+                                  }
+                                },
+                                style: customTextStyle(size: 20.0),
+                                decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    hintText: labelIdNum,
+                                    hintStyle: customTextStyle(size: 18.0)),
+                              )),
+                        ),
+                        Flexible(
+                          child: DropdownButton<String>(
                             style: customTextStyle(size: 20.0),
-                            decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                hintText: labelIdNum,
-                                hintStyle: customTextStyle(size: 18.0)),
-                          )),
-                    ),
-                    Flexible(
-                      child: DropdownButton<String>(
-                        style: customTextStyle(size: 20.0),
-                        hint: Text(program),
-                        value: selectedCourse,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedCourse = value!;
-                          });
-                        },
-                        items: courseItem.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ]),
-            ),
-          ),
-          Positioned.fill(
-            top: 100,
-            bottom: 80,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: IgnorePointer(
-                ignoring: idNum.isEmpty && selectedCourse == null,
-                child: Opacity(
-                  opacity: idNum.isEmpty && selectedCourse == null ? 0.5 : 1.0,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Flexible(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Table(
-                            border:
-                                TableBorder.all(color: Colors.black, width: 2),
-                            defaultColumnWidth: const FlexColumnWidth(),
-                            children: [
-                              TableRow(
-                                children: [
-                                  gradeContainer(courseCode),
-                                  gradeContainer(units),
-                                  gradeContainer(rating),
-                                ],
-                              ),
-                              for (var data in gradesList)
-                                TableRow(
-                                  children: [
-                                    buildTextFieldContainer(
-                                      onChanged: (value) =>
-                                          data.courseCode = value.toUpperCase(),
-                                    ),
-                                    buildTextFieldContainer(
-                                      keyboardType: TextInputType.number,
-                                      onChanged: (value) =>
-                                          data.units = int.tryParse(value),
-                                    ),
-                                    buildTextFieldContainer(
-                                      keyboardType: TextInputType.number,
-                                      onChanged: (value) =>
-                                          data.rating = double.tryParse(value),
-                                    ),
-                                  ],
-                                ),
-                            ],
+                            hint: Text(program),
+                            value: selectedCourse,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedCourse = value!;
+                              });
+                            },
+                            items: courseItem.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
                           ),
                         ),
+                      ]),
+                ),
+              ),
+              Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: IgnorePointer(
+                    ignoring: idNum.isEmpty && selectedCourse == null,
+                    child: Opacity(
+                      opacity:
+                          idNum.isEmpty && selectedCourse == null ? 0.5 : 1.0,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Table(
+                                border: TableBorder.all(
+                                    color: Colors.black, width: 2),
+                                defaultColumnWidth: const FlexColumnWidth(),
+                                children: [
+                                  TableRow(
+                                    children: [
+                                      gradeContainer(courseCode),
+                                      gradeContainer(units),
+                                      gradeContainer(rating),
+                                    ],
+                                  ),
+                                  for (var data in gradesList)
+                                    TableRow(
+                                      children: [
+                                        buildTextFieldContainer(
+                                          onChanged: (value) => data
+                                              .courseCode = value.toUpperCase(),
+                                        ),
+                                        buildTextFieldContainer(
+                                          keyboardType: TextInputType.number,
+                                          onChanged: (value) =>
+                                              data.units = int.tryParse(value),
+                                        ),
+                                        buildTextFieldContainer(
+                                          keyboardType: TextInputType.number,
+                                          onChanged: (value) => data.rating =
+                                              double.tryParse(value),
+                                        ),
+                                      ],
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                          FloatingActionButton(
+                            shape: const CircleBorder(),
+                            backgroundColor: fabColor,
+                            onPressed: () =>
+                                setState(() => gradesList.add(Grades())),
+                            child: const Icon(Icons.add, color: Colors.white),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 30),
-                      FloatingActionButton(
-                        shape: const CircleBorder(),
-                        backgroundColor: fabColor,
-                        onPressed: () =>
-                            setState(() => gradesList.add(Grades())),
-                        child: const Icon(Icons.add, color: Colors.white),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ]),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -184,9 +188,7 @@ class _CheckCareerState extends State<CheckCareer> {
               ),
             ),
           ),
-        ],
-      ),
-    );
+        ]));
   }
 
   Widget buildTextFieldContainer({

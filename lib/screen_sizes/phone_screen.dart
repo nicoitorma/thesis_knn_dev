@@ -3,7 +3,6 @@ import 'package:th_knn/values/strings.dart';
 import 'package:th_knn/widgets/drawer.dart';
 import 'package:th_knn/widgets/overview.dart';
 import 'package:th_knn/widgets/text_style.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/appbar.dart';
 
@@ -18,16 +17,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //     appBar: AppBar(toolbarHeight: 0.0),
-    //     body: Stack(children: [
-    //       const BackgroundImage(),
-    //       const Header(size: 50),
-    //       const Bg1(leftMargin: 90),
-    //       mainContent(),
-    //       const InfoAbout()
-    //     ]));
-
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar(goodDay),
@@ -63,23 +52,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 10.0),
-            child: TextButton(
-                onPressed: () async {
-                  String url =
-                      'https://nicoitorma.github.io/ocg-knn/ocg-priv-pol.html';
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    const CircularProgressIndicator();
-                    await launchUrl(Uri.parse(url),
-                        mode: LaunchMode.platformDefault);
-                  }
-                },
-                child: Text(labelPrivacy)),
-          ),
-        )
       ]),
     );
   }
