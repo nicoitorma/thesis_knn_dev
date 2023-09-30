@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:th_knn/values/colors.dart';
 import 'package:th_knn/widgets/appbar.dart';
 import 'package:th_knn/widgets/box_decoration.dart';
 import 'package:th_knn/widgets/overview.dart';
@@ -37,9 +36,8 @@ class _CheckCareerState extends State<CheckCareer> {
     return Scaffold(
         appBar: appBar(btn2),
         body: Stack(children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 20.0, right: 20, top: 20, bottom: 75),
+          Container(
+            margin: const EdgeInsets.fromLTRB(15, 15, 15, 90),
             child: SingleChildScrollView(
               child: Column(children: [
                 headingCard(labelInstruction, labelInstruction1),
@@ -160,15 +158,13 @@ class _CheckCareerState extends State<CheckCareer> {
                   children: [
                     FloatingActionButton(
                       tooltip: labelFabTooltip,
-                      shape: const CircleBorder(),
-                      backgroundColor: fabColor,
                       onPressed: () {
                         if ((selectedCourse == null) || (idNum == '')) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                               errorNoIdProgram,
                               style: customTextStyle(
-                                  size: 20.0, color: Colors.white),
+                                  size: 14.0, color: Colors.white),
                             ),
                           ));
                           return;
@@ -200,7 +196,7 @@ class _CheckCareerState extends State<CheckCareer> {
                               content: Text(
                                 insufficientData,
                                 style: customTextStyle(
-                                    size: 20.0, color: Colors.white),
+                                    size: 14.0, color: Colors.white),
                               ),
                             ),
                           );
@@ -240,7 +236,7 @@ class _CheckCareerState extends State<CheckCareer> {
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
         child: Text(
           check,
-          style: customTextStyle(size: 20.0, fontWeight: FontWeight.w700),
+          style: customTextStyle(size: 14.0, fontWeight: FontWeight.w700),
         ),
       ),
     );

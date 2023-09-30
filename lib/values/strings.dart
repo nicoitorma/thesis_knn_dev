@@ -23,7 +23,7 @@ String labelIdNum = 'ID Number';
 String labelFabTooltip = 'Add additional fields';
 String labelInstruction = 'Instructions:';
 String labelInstruction1 =
-    '1. Please enter your major subjects only. \n2. Form will be disabled if ID number and Program are empty. \n3. Click the add button below to add fields if needed.';
+    '1. Please enter your major subjects only. \n2. To enable the form, please enter your ID number and Program first. \n3. Click the add button below to add fields if needed.';
 String errorNoIdProgram = 'Please enter ID number and Program first';
 String labelEnterGrades = 'Enter your grades';
 String labelYourRes = 'Your Results';
@@ -36,6 +36,7 @@ String labelOk = 'OK';
 String labelCancel = 'Cancel';
 String labelExpectedCareer = 'Expected Career';
 String labelSkill = 'Skills & Certifications';
+String labelAllrightsReserved = 'All rights reserved, 2023';
 
 String labelPrivacy = 'Privacy Policy';
 String labelAbout = 'About';

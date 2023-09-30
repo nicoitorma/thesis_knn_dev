@@ -5,6 +5,7 @@ import 'package:th_knn/widgets/overview.dart';
 import 'package:th_knn/widgets/text_style.dart';
 
 import '../widgets/appbar.dart';
+import '../widgets/footer.dart';
 
 class PhoneScreen extends StatefulWidget {
   const PhoneScreen({super.key});
@@ -23,7 +24,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
       drawer: drawer(scaffoldKey: scaffoldKey),
       body: Stack(children: [
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(15.0),
           child: ListView(
             children: [
               headingCard(labelOverview, labelOverview1),
@@ -48,7 +49,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 25),
+              footer()
             ],
           ),
         ),

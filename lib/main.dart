@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:th_knn/screen_sizes/phone_screen.dart';
 import 'package:th_knn/screen_sizes/web_screen.dart';
+import 'package:th_knn/values/colors.dart';
 import 'package:th_knn/values/strings.dart';
 
 import 'firebase_options.dart';
@@ -26,6 +27,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        floatingActionButtonTheme:
+            FloatingActionButtonThemeData(backgroundColor: fabColor),
         textTheme:
             const TextTheme(headlineLarge: TextStyle(color: Colors.white)),
       ),
