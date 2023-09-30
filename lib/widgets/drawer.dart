@@ -27,14 +27,6 @@ drawer({var scaffoldKey}) => StatefulBuilder(builder: ((context, setState) {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.dashboard_rounded),
-              title: Text('Dashboard',
-                  style: customTextStyle(size: 16.0, color: Colors.black)),
-              onTap: () {
-                scaffoldKey.currentState?.closeDrawer();
-              },
-            ),
-            ListTile(
               leading: const Icon(Icons.edit_document),
               title: Text(btn1,
                   style: customTextStyle(size: 16.0, color: Colors.black)),

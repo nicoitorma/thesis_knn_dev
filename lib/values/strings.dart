@@ -7,13 +7,12 @@ String btn3 = 'Skills and Certifications';
 String labelTheKnn = 'The KNN Algorithm';
 String labelOverview = 'Overview';
 String labelOverview1 =
-    'The Career Guidance system is a tool that can provide guidance and support to students in their future careers. The career recommendation functionality of the CICT Career Guidance system is one of the most important feature. Using the KNN algorithm to suggest careers based on their prior academic performance.';
+    'The Career Guidance system is a tool that can provide guidance and support to students in their future careers. The career prediction feature of the CICT Career Guidance system is one of the most important features. It uses the K-Nearest Neighbors algorithm to suggest careers based on academic performance.';
 String program = 'Program';
 String courseCode = 'Course Code';
 String units = 'Units';
 String rating = 'Rating';
-String check = 'Check my results';
-String noData = 'No Data Input';
+String check = 'Check results';
 String insufficientData = 'Insufficient Data';
 String noProgram = 'No Program selected';
 String legends = 'Legends';
@@ -23,7 +22,7 @@ String labelIdNum = 'ID Number';
 String labelFabTooltip = 'Add additional fields';
 String labelInstruction = 'Instructions:';
 String labelInstruction1 =
-    '1. Please enter your major subjects only. \n2. To enable the form, please enter your ID number and Program first. \n3. Click the add button below to add fields if needed.';
+    '1. Enter your major subjects only. \n2. To enable the form, enter your ID number and Program first. \n3. Click the add button below to add fields if needed. \n4. Enter at least 10 of your major subjects.';
 String errorNoIdProgram = 'Please enter ID number and Program first';
 String labelEnterGrades = 'Enter your grades';
 String labelYourRes = 'Your Results';
