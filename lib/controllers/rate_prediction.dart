@@ -1,32 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-import '../models/grades.dart';
+import '../models/rating.dart';
 import '../values/strings.dart';
 
 final _db = FirebaseFirestore.instance;
 
-saveGradeToOnline(List<Grades> grades, String program, String? idNum,
-    String expectedCareer) async {
+saveGradeToOnline(Rating predRating) async {
   Map<String, dynamic> dataMap = {};
 
-  for (int i = 0; i < grades.length; i++) {
-    int? unit = grades[i].units;
-    double? rating = grades[i].rating;
+  for (int i = 0; i < predRating.grades!.length; i++) {
+    int? unit = predRating.grades![i].units;
+    double? rating = predRating.grades![i].rating;
 
     Map<String, dynamic> unitRatingMap = {
       'rating': rating,
       'units': unit,
     };
-    dataMap[grades[i].courseCode!] = unitRatingMap;
+    dataMap[predRating.grades![i].courseCode!] = unitRatingMap;
   }
 
   try {
     /// This will add a new grades to the document [saved_grades]
-    await _db
-        .collection(labelCollection)
-        .doc('$program ($idNum) - $expectedCareer')
-        .set(dataMap);
+    String docName =
+        '${predRating.program!.substring(2)}(${predRating.idNum!.substring(2)})(${predRating.rating}stars)${predRating.expectedCareer}';
+    await _db.collection(labelCollection).doc(docName).set(dataMap);
   } catch (err) {
-    print(err);
+    debugPrint(err.toString());
   }
 }

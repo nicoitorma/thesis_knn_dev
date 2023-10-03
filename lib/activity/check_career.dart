@@ -34,7 +34,7 @@ class _CheckCareerState extends State<CheckCareer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar(btn2),
+        appBar: appBar(title: btn2),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -71,7 +71,6 @@ class _CheckCareerState extends State<CheckCareer> {
                       /// Program drop-down
                       Flexible(
                         child: DropdownButton<String>(
-                          style: customTextStyle(size: 20.0),
                           hint: Text(program),
                           value: selectedCourse,
                           onChanged: (value) {
@@ -107,8 +106,7 @@ class _CheckCareerState extends State<CheckCareer> {
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Table(
-                                border: TableBorder.all(
-                                    color: Colors.black, width: 2),
+                                border: TableBorder.all(width: 2),
                                 defaultColumnWidth: const FlexColumnWidth(),
                                 children: [
                                   TableRow(
@@ -166,15 +164,14 @@ class _CheckCareerState extends State<CheckCareer> {
                                   .showSnackBar(SnackBar(
                                 content: Text(
                                   errorNoIdProgram,
-                                  style: customTextStyle(
-                                      size: 14.0, color: Colors.white),
+                                  style: customTextStyle(size: 14.0),
                                 ),
                               ));
                               return;
                             }
                             setState(() => gradesList.add(Grades()));
                           },
-                          child: const Icon(Icons.add, color: Colors.white),
+                          child: const Icon(Icons.add),
                         ),
                         InkWell(
                           onTap: () {

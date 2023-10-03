@@ -11,10 +11,10 @@ import '../values/const.dart';
 import 'about.dart';
 import 'help.dart';
 
-drawer({var scaffoldKey}) => StatefulBuilder(builder: ((context, setState) {
+drawer({var scaffoldKey, var themeProv}) =>
+    StatefulBuilder(builder: ((context, setState) {
       return Drawer(
           elevation: 5,
-          backgroundColor: Colors.white,
           child: ListView(shrinkWrap: true, children: [
             DrawerHeader(
               child: Center(

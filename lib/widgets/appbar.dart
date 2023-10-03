@@ -2,10 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:th_knn/widgets/text_style.dart';
 
-appBar(String title) => AppBar(
+appBar({var context, String? title}) => AppBar(
     toolbarHeight: 70,
-    backgroundColor: Colors.white,
-    iconTheme: const IconThemeData(color: Colors.black),
     centerTitle: (kIsWeb) ? true : false,
     title: FittedBox(
       fit: BoxFit.fitWidth,
@@ -16,7 +14,7 @@ appBar(String title) => AppBar(
             Image.asset('assets/imgs/catsu.png', height: 50, width: 50),
             const SizedBox(width: 15),
             Text(
-              title,
+              title!,
               style: headerTextStyle(),
               overflow: TextOverflow.ellipsis,
             ),

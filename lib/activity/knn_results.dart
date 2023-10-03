@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
+import 'package:th_knn/models/rating.dart';
 import 'package:th_knn/values/const.dart';
 import 'package:th_knn/widgets/appbar.dart';
 import 'package:th_knn/widgets/text_style.dart';
@@ -87,7 +88,7 @@ class _KnnResultState extends State<KnnResult> {
     }
 
     return Scaffold(
-        appBar: appBar(labelYourRes),
+        appBar: appBar(title: labelYourRes),
         body: Stack(children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -244,20 +245,21 @@ class _KnnResultState extends State<KnnResult> {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      saveGradeToOnline(
-                                          widget.gradesList,
-                                          widget.program,
-                                          widget.idNum,
-                                          expectedCareer ??
-                                              highestValueKey(countMap));
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(labelOk)),
-                                TextButton(
-                                    onPressed: () {
                                       Navigator.pop(context);
                                     },
                                     child: Text(labelCancel)),
+                                TextButton(
+                                    onPressed: () {
+                                      saveGradeToOnline(Rating(
+                                          grades: widget.gradesList,
+                                          program: widget.program,
+                                          idNum: widget.idNum,
+                                          rating: predRating,
+                                          expectedCareer: expectedCareer ??
+                                              highestValueKey(countMap)));
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(labelOk)),
                               ],
                               content:
                                   StatefulBuilder(builder: (context, setState) {
@@ -301,7 +303,6 @@ class _KnnResultState extends State<KnnResult> {
                                                   const OutlineInputBorder(),
                                               hintText: labelExpectedCareer,
                                               hintStyle: const TextStyle(
-                                                  fontFamily: 'Poppins',
                                                   fontSize: 18)),
                                         ),
                                       )

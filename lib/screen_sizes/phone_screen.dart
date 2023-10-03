@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/values/strings.dart';
 import 'package:th_knn/widgets/drawer.dart';
+import 'package:th_knn/widgets/knn_animation.dart';
 import 'package:th_knn/widgets/overview.dart';
 import 'package:th_knn/widgets/text_style.dart';
 
@@ -21,7 +22,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar(goodDay),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: appBar(title: goodDay),
       drawer: drawer(scaffoldKey: scaffoldKey),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -31,25 +33,34 @@ class _PhoneScreenState extends State<PhoneScreen> {
             const SizedBox(height: 20),
             Card(
               elevation: 5,
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      labelTheKnn,
-                      textAlign: TextAlign.start,
-                      style: customTextStyle(
-                          size: 18.0, fontWeight: FontWeight.bold),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        labelTheKnn,
+                        textAlign: TextAlign.start,
+                        style: customTextStyle(
+                            size: 18.0, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  Image.asset('assets/imgs/knn.gif'),
-                ],
+                    Container(
+                        decoration: BoxDecoration(border: Border.all()),
+                        padding: const EdgeInsets.all(5),
+                        child: const KNNAnimation())
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 20),
             const Card(
               elevation: 5,
-              child: AspectRatio(aspectRatio: 1.9, child: RandomBarGraph()),
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: AspectRatio(aspectRatio: 1.9, child: RandomBarGraph()),
+              ),
             ),
             const SizedBox(height: 25),
             footer()

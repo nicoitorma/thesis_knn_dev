@@ -13,7 +13,7 @@ class SkillsRecom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar(btn3),
+        appBar: appBar(title: btn3),
         body: Stack(
           children: [
             FutureBuilder(
@@ -30,8 +30,6 @@ class SkillsRecom extends StatelessWidget {
                         final skill = data[index];
                         return Card(
                           child: ExpansionTile(
-                              textColor: Colors.black,
-                              collapsedTextColor: Colors.black,
                               title: Text(skill.title.toString(),
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold)),

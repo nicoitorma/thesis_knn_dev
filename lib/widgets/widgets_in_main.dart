@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:th_knn/widgets/footer.dart';
+import 'package:th_knn/widgets/knn_animation.dart';
 import 'package:th_knn/widgets/text_style.dart';
 
 import '../values/const.dart';
@@ -29,17 +30,20 @@ mainContent() => Padding(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Align(
-                                alignment: Alignment.topLeft,
+                                alignment: Alignment.center,
                                 child: Text(
                                   labelTheKnn,
-                                  textAlign: TextAlign.start,
                                   style: customTextStyle(
                                       size: 18.0, fontWeight: FontWeight.bold),
                                 ),
                               ),
                               AspectRatio(
                                 aspectRatio: 2,
-                                child: Image.asset('assets/imgs/knn.gif'),
+                                child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration:
+                                        BoxDecoration(border: Border.all()),
+                                    child: const KNNAnimation()),
                               ),
                             ],
                           ),

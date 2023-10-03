@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:th_knn/widgets/widgets_in_main.dart';
 
 import '../values/strings.dart';
+
 import '../widgets/appbar.dart';
 import '../widgets/drawer.dart';
 
@@ -16,7 +17,8 @@ class _WebScreenState extends State<WebScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar(goodDay),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: appBar(title: goodDay),
         body: LayoutBuilder(
           builder: ((context, constraints) {
             if (constraints.maxWidth > 600) {
