@@ -23,7 +23,7 @@ saveGradeToOnline(Rating predRating) async {
   try {
     /// This will add a new grades to the document [saved_grades]
     String docName =
-        '${predRating.program!.substring(2)}(${predRating.idNum!.substring(2)})(${predRating.rating}stars)${predRating.expectedCareer}';
+        '${predRating.program}_(${predRating.idNum})_(${predRating.rating} stars)_${predRating.expectedCareer}';
     await _db.collection(labelCollection).doc(docName).set(dataMap);
   } catch (err) {
     debugPrint(err.toString());
